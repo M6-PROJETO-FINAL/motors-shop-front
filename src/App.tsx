@@ -1,7 +1,9 @@
+import { RoutesMain } from "./Routes";
+
 function App() {
   return (
     <div className="App">
-      <div>Criando template</div>
+      <RoutesMain />
     </div>
   );
 }
