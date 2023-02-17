@@ -3,6 +3,7 @@ import { createGlobalStyle } from "styled-components";
 export default createGlobalStyle`
 
 * {
+    width: 100%;
     margin:0;
     padding: 0;
     outline:0;
@@ -63,11 +64,17 @@ export default createGlobalStyle`
 
     background-color: var(--white);
     color: var(--grey-01);
-    }
+  }
+    
+  ul, li, a{
+    list-style: none;
+    text-decoration: none; 
+  }
 
   body, input, button, textarea {
     font-family: 'Poppins';
   }
+  
   button {
     text-align: center;
     cursor: pointer;
