@@ -1,20 +1,13 @@
 // import Navbar from "../../components/Navbar";
 import { Footer } from "../../components/Footer";
-import NavbarLogged from "../../components/NavbarLogged";
-import ProfileViewAdmin from "../ProfileViewAdmin";
+import Header from "../../components/Header";
 
-const HomePage = () => {
-  const token = localStorage.getItem("@Token");
-  const idUser = localStorage.getItem("@UserId");
-
+const HomePage = (): JSX.Element => {
   return (
     <main>
-      {/* {token ? <NavbarLogged /> : <Navbar />} */}
-      {/* <NavbarLogged /> */}
-      {/* <Navbar /> */}
-      {/* <h1>Página HomePage!!</h1> */}
-      {/* <Footer /> */}
-      <ProfileViewAdmin />
+      <Navbar />
+      <Header />
+      <Footer />
     </main>
   );
 };
