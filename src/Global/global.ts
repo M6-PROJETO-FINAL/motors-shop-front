@@ -18,7 +18,8 @@ export default createGlobalStyle`
 
     --grey-00: #0B0D0D;
     --grey-01: #212529;
-    --grey-03: #495057;
+    --grey-02: #495057;
+    --grey-03: #868e96;
     --grey-04: #ADB5BD;
     --grey-05: #CED4DA;
     --grey-06: #DEE2E6;
@@ -80,3 +81,5 @@ export default createGlobalStyle`
     cursor: pointer;
   }
 `;
+
+

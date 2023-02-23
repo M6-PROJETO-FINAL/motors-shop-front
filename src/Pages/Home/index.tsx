@@ -1,11 +1,12 @@
 import Navbar from "../../components/Navbar";
 import { Footer } from "../../components/Footer";
+import Header from "../../components/Header";
 
-const HomePage = () => {
+const HomePage = (): JSX.Element => {
   return (
     <main>
       <Navbar />
-      <h1>Página HomePage!!</h1>
+      <Header />
       <Footer />
     </main>
   );

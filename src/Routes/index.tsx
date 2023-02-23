@@ -6,11 +6,10 @@ import RegisterPage from "../Pages/Register";
 
 export const RoutesMain = () => {
 
-  let Navigate = useNavigate()
   return (
     <BrowserRouter>
       <Routes>
-      <Route path="/" element={<Navigate replace to={"home"} />} />
+      <Route path="/" element={<HomePage/>} />
       <Route path="/home" element={<HomePage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />

@@ -6,12 +6,14 @@ export const NavStyled = styled.nav`
   height: 85px;
   display: flex;
   justify-content: center;
+  background-color: var(--white);
   align-items: center;
   border-bottom: 2px solid var(--grey-07);
   font-family: "Inter";
 `;
 
 export const NavContent = styled.div`
+  position: absolute;
   max-width: 1600px;
   display: flex;
   justify-content: space-between;
@@ -22,10 +24,6 @@ export const NavContent = styled.div`
 export const Logotipo = styled.div`
   width: 200px;
   padding: 15px 0;
-
-  @media ${device.mobile} {
-    width: 150px;
-  }
 `;
 
 type PropTypeBg = {
@@ -118,46 +116,62 @@ export const MenuLinks = styled.ul<PropTypeBg>`
 
     li {
       text-align: left;
-      padding: 1.8rem 0;
+      padding: 1rem 0;
       font-weight: 600;
     }
   }
 `;
 
-export const ButtonLoginStyled = styled.button`
-  font-size: 1rem;
+export const ButtonLoginStyled = styled.button.attrs((props: PropTypeBg) => ({
+  visible: props.visible,
+}))<PropTypeBg>`
+  margin-left: 2.5rem;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 800;
   font-family: "Inter";
   border: none;
-  font-weight: 400;
   color: var(--brand-01);
-  background-color: transparent;
+  background-color: var(--brand-01);
+  color: var(--white);
+  border-radius: 50%;
   gap: 1rem;
   padding: 0 1rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--brand-03);
+  }
+
   @media ${device.laptop} {
-    text-align: left;
-    padding: 2rem 0;
-    margin-bottom: 1rem;
+    display: none;
+    overflow: hidden;
   }
 `;
 
-export const ButtonRegisterStyled = styled.button`
+export const ButtonRegisterStyled = styled.p`
+  flex-wrap: nowrap;
+  flex-direction: row;
+  flex-flow: row nowrap;
   font-size: 1rem;
   font-family: "Inter";
-  font-weight: 500;
-  border: 2px solid var(--grey-04);
-  padding: 10px;
+  font-weight: 400;
+  border: none;
+  margin-left: 20px;
   color: var(--grey-02);
-  border-radius: 5px;
   background-color: transparent;
 
   &:hover {
     color: var(--brand-01);
-    border: 2px solid var(--brand-01);
-    background-color: var(--brand-04);
   }
 
   @media ${device.laptop} {
-    padding: 10px;
+    display: none;
+    overflow: hidden;
   }
 `;
 
@@ -170,5 +184,108 @@ export const DivLineHeaderStyled = styled.div`
     align-items: center;
     height: 2px;
     z-index: 4;
+  }
+`;
+
+export const EditPerfilHeaderModalStyled = styled.div`
+  display: none;
+  overflow: hidden;
+
+  @media ${device.laptop} {
+    display: block;
+    margin: 1rem 0;
+
+    .titleEditHeader {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+
+      > svg {
+        display: block;
+        top: 20px;
+        width: 25px;
+        margin-right: 0.5rem;
+        cursor: pointer;
+        color: var(--grey-02);
+      }
+    }
+
+    .buttonsEditHeader {
+      display: flex;
+      flex-direction: column;
+      gap: 1.9rem;
+    }
+
+    button {
+      font-family: "Inter";
+      font-size: 1rem;
+      background-color: transparent;
+      border: none;
+      text-align: left;
+      font-weight: 400;
+      color: var(--grey-02);
+      cursor: pointer;
+      outline: none;
+      flex-flow: nowrap;
+      gap: 1rem;
+
+      &:hover {
+        color: var(--brand-01);
+      }
+    }
+  }
+`;
+
+export const ButtonsEditHeader = styled.div<PropTypeBg>`
+  display: ${({ visible }: PropTypeBg) => (visible ? "block" : "none")};
+  flex-flow: column nowrap;
+  backdrop-filter: blur(3px);
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.8668555240793201) 0%,
+    rgba(253, 253, 253, 0.6515580736543909) 53%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  position: fixed;
+  z-index: 4;
+  top: 20px;
+  right: 40px;
+  overflow: hidden;
+  height: 230px;
+  width: 300px;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 1px 6px 17px -4px rgba(161, 158, 161, 1);
+
+  > svg {
+    display: block;
+    position: fixed;
+    top: 20px;
+    right: -110px;
+    cursor: pointer;
+  }
+
+  button {
+    font-family: "Inter";
+    font-size: 1rem;
+    background-color: transparent;
+    border: none;
+    text-align: left;
+    font-weight: 400;
+    color: var(--grey-02);
+    cursor: pointer;
+    outline: none;
+    flex-flow: nowrap;
+    padding-bottom: 1.8rem;
+
+    &:hover {
+      color: var(--brand-01);
+    }
+  }
+
+  @media ${device.laptop} {
+    display: none;
+    overflow: hidden;
   }
 `;
