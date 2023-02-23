@@ -42,7 +42,7 @@
   yarn 
 ```
 
-* Para rodar a aplicação use yarn dev 
+* Para rodar a aplicação use:
 
 ```bash
   yarn start
@@ -52,5 +52,58 @@
 ## 💻 Back-End
 
 > [Clique aqui](https://github.com/M6-PROJETO-FINAL/motors-shop-back) para acessar o repositório do back-end da aplicação.
+ 
+ &nbsp;
+## 🤝 Contato dos Contribuintes
 
- <br />
+<table>
+ <tr>
+  <td align="center">
+   <a href="https://www.linkedin.com/in/laraponciano/">
+    <img src="https://avatars.githubusercontent.com/lara-plc " width="150px;" alt="Lara Github Photo"/><br>
+    <sub>
+     <b>Lara Ponciano</b>
+    </sub>
+   </a>
+  </td>
+ </tr>
+</table>
+
+<table>
+ <tr>
+  <td align="center">
+   <a href="https://www.linkedin.com/in/higorskw/">
+    <img src="https://avatars.githubusercontent.com/HigorSkw " width="150px;" alt="Higor Github Photo"/><br>
+    <sub>
+     <b>Higor Skowronski</b>
+    </sub>
+   </a>
+  </td>
+ </tr>
+</table>
+
+<table>
+ <tr>
+  <td align="center">
+   <a href="https://www.linkedin.com/in/ericalopes">
+    <img src="https://avatars.githubusercontent.com/erica-lopes" width="150px;" alt="Erica Github Photo"/><br>
+    <sub>
+     <b>Erica Lopes</b>
+    </sub>
+   </a>
+  </td>
+ </tr>
+</table>
+
+<table>
+ <tr>
+  <td align="center">
+   <a href="https://www.linkedin.com/in/rinaldo-silvino-9074481b7/">
+    <img src="https://avatars.githubusercontent.com/rinaldosilvino " width="150px;" alt="Rinaldo Github Photo"/><br>
+    <sub>
+     <b>Rinaldo Silvino</b>
+    </sub>
+   </a>
+  </td>
+ </tr>
+</table>
