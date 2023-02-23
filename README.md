@@ -54,5 +54,3 @@
 > [Clique aqui](https://github.com/M6-PROJETO-FINAL/motors-shop-back) para acessar o repositório do back-end da aplicação.
 
  <br />
-
-[ Voltar para o topo ](#desafio-fullstack)
