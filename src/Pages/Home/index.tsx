@@ -1,21 +1,15 @@
 import Navbar from "../../components/Navbar";
 import { Footer } from "../../components/Footer";
-import { ButtonCars, ButtonRides } from "../../components/ButtonVehicles";
+import Header from "../../components/Header";
 
 
-const HomePage = () => {
-  const handlerCars = () => {
-  }
-  const handlerRides = () => {
-  }
+const HomePage = (): JSX.Element => {
+
 
   return (
     <main>
       <Navbar />
-      <ButtonCars onClick={() => handlerCars}/>
-      <ButtonRides onClick={() => handlerRides} />
-      <h1>Página HomePage!!</h1>
-
+      <Header />
       <Footer />
     </main>
   );

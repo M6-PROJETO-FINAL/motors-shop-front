@@ -1,4 +1,4 @@
-import { ContainerButtonVehicle } from "./style";
+import { ContainerButtonVehicle } from "../../Global/buttonStyle";
 
 interface IpropsButton {
     onClick: () => void;
