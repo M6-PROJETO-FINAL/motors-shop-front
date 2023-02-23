@@ -54,7 +54,7 @@ const HeadingTest = (): JSX.Element => {
       <Heading level={2} fontWeigth={700} color={"brand02"}>
         Será que deu certo?
       </Heading>
-      <Heading level={3} fontWeigth={700} color={"brand04"}>
+      <Heading level={3} fontWeigth={700} color={"brand04"} size={"large"}>
         Será que deu certo?
       </Heading>
     </>
