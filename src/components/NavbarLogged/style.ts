@@ -237,13 +237,6 @@ export const EditPerfilHeaderModalStyled = styled.div`
 `;
 
 export const ButtonsEditHeader = styled.div<PropTypeBg>`
-  /* display: flex;
-  align-items: center;
-  position: fixed;
-  cursor: pointer;
-  flex-direction: column;
-  gap: 1.9rem; */
-
   display: ${({ visible }: PropTypeBg) => (visible ? "block" : "none")};
   flex-flow: column nowrap;
   backdrop-filter: blur(3px);
