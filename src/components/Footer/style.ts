@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from "../../Global/media";
 
 export const ContainerFooter = styled.div`
   display: flex;
@@ -15,6 +16,19 @@ export const ContainerFooter = styled.div`
     justify-content: space-between;
     padding: 3rem;
     color: var(--white);
+
+    img {
+      width: 9.5rem;
+    }
+
+    p {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 24px;
+      width: 30%;
+    }
   }
 
   .footer-div-btn {
@@ -23,7 +37,7 @@ export const ContainerFooter = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--grey-03);
+    background: var(--grey-01);
     border: 1px;
     border-radius: 4px;
     cursor: pointer;
@@ -35,6 +49,19 @@ export const ContainerFooter = styled.div`
 
       svg {
         color: white;
+      }
+    }
+  }
+
+  @media ${device.mobile} {
+    height: 19.375rem;
+
+    .footer-div-main {
+      flex-direction: column;
+      align-items: center;
+
+      p {
+        width: 18rem;
       }
     }
   }
