@@ -19,7 +19,7 @@ const ProfileViewAdmin = () => {
       <BackgroundHeaderStyled className="background"></BackgroundHeaderStyled>
       
       <ProfileHeader>
-      
+
         <ProfileContent>
           <ButtonLoginStyled>SL</ButtonLoginStyled>
 

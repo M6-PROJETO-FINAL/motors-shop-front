@@ -13,6 +13,7 @@ import {
   ButtonRegisterStyled,
   DivLineHeaderStyled,
   EditPerfilHeaderModalStyled,
+  ButtonsEditHeader,
 } from "./style";
 import { useState } from "react";
 
@@ -59,7 +60,18 @@ const NavbarLogged = () => {
             </div>
           </EditPerfilHeaderModalStyled>
 
-          <ButtonLoginStyled>NU</ButtonLoginStyled>
+          <ButtonLoginStyled onClick={() => setVisible(!visible)}>
+            NU
+          </ButtonLoginStyled>
+
+          <ButtonsEditHeader visible={visible}>
+            <IoClose size={28} onClick={() => setVisible(false)} />
+            <button>Editar Perfil</button>
+            <button>Editar Endereço</button>
+            <button>Minhas Compras</button>
+            <button>Sair</button>
+          </ButtonsEditHeader>
+
           <ButtonRegisterStyled>Nome do Usuário</ButtonRegisterStyled>
         </MenuLinks>
       </NavContent>
