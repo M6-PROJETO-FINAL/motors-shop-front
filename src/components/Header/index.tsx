@@ -1,6 +1,6 @@
 import { ButtonCars, ButtonRides } from "../Button";
 import { HeaderContent, HeaderStyled } from "./style";
-import { DivButton } from "../../Global/buttonStyle";
+import { DivButton } from "../Button/style";
 
 
 const Header = () =>{
