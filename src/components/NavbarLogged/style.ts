@@ -122,7 +122,9 @@ export const MenuLinks = styled.ul<PropTypeBg>`
   }
 `;
 
-export const ButtonLoginStyled = styled.button`
+export const ButtonLoginStyled = styled.button.attrs((props: PropTypeBg) => ({
+  visible: props.visible,
+}))<PropTypeBg>`
   margin-left: 2.5rem;
   width: 2rem;
   height: 2rem;
@@ -231,5 +233,66 @@ export const EditPerfilHeaderModalStyled = styled.div`
         color: var(--brand-01);
       }
     }
+  }
+`;
+
+export const ButtonsEditHeader = styled.div<PropTypeBg>`
+  /* display: flex;
+  align-items: center;
+  position: fixed;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 1.9rem; */
+
+  display: ${({ visible }: PropTypeBg) => (visible ? "block" : "none")};
+  flex-flow: column nowrap;
+  backdrop-filter: blur(3px);
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.8668555240793201) 0%,
+    rgba(253, 253, 253, 0.6515580736543909) 53%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  position: fixed;
+  z-index: 4;
+  top: 20px;
+  right: 40px;
+  overflow: hidden;
+  height: 230px;
+  width: 300px;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 1px 6px 17px -4px rgba(161, 158, 161, 1);
+
+  > svg {
+    display: block;
+    position: fixed;
+    top: 20px;
+    right: -110px;
+    cursor: pointer;
+  }
+
+  button {
+    font-family: "Inter";
+    font-size: 1rem;
+    background-color: transparent;
+    border: none;
+    text-align: left;
+    font-weight: 400;
+    color: var(--grey-02);
+    cursor: pointer;
+    outline: none;
+    flex-flow: nowrap;
+    padding-bottom: 1.8rem;
+
+    &:hover {
+      color: var(--brand-01);
+    }
+  }
+
+  @media ${device.laptop} {
+    display: none;
+    overflow: hidden;
   }
 `;
