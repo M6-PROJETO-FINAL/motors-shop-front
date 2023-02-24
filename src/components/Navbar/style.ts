@@ -22,6 +22,10 @@ export const NavContent = styled.div`
 export const Logotipo = styled.div`
   width: 200px;
   padding: 15px 0;
+
+  @media ${device.mobile} {
+    width: 150px;
+  }
 `;
 
 type PropTypeBg = {
@@ -47,7 +51,7 @@ export const MenuIconStyled = styled.div.attrs((props: PropTypeBg) => ({
   @media ${device.laptop} {
     display: flex;
     align-items: center;
-    position: fixed;
+    position: static;
     cursor: pointer;
   }
 `;

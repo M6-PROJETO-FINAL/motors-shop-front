@@ -1,7 +1,8 @@
-import { Navigate, Route, Routes } from "react-router";
+import { Route, Routes, Navigate } from "react-router-dom";
 
 import HomePage from "../Pages/Home";
 import LoginPage from "../Pages/Login";
+import ProfileViewAdmin from "../Pages/ProfileViewAdmin";
 import RegisterPage from "../Pages/Register";
 
 export const RoutesMain = () => {
@@ -11,6 +12,7 @@ export const RoutesMain = () => {
       <Route path="/home" element={<HomePage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
+      <Route path="/profile" element={<ProfileViewAdmin />} />
     </Routes>
   );
 };
