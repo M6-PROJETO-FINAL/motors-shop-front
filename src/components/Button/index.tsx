@@ -11,5 +11,6 @@ interface IpropsButton {
   const ButtonRides = ({ onClick }: IpropsButton) => {
     return <ContainerButtonVehicle onClick={onClick}>Motos</ContainerButtonVehicle>;
   };
-  
-  export {ButtonCars, ButtonRides };
+
+
+  export {ButtonCars, ButtonRides};
