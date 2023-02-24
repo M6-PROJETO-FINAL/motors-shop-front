@@ -35,6 +35,13 @@ export const Container = styled.div`
 
     .vehicleInfo {
       padding: 1rem;
+      font-family: "Inter";
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 24px;
+      letter-spacing: 0em;
+      text-align: left;
+      color: #000;
     }
 
     .saleType {
@@ -43,6 +50,16 @@ export const Container = styled.div`
       gap: 1rem;
 
       padding: 1rem;
+
+      p {
+        font-family: "Inter";
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 24px;
+        letter-spacing: 0em;
+        text-align: left;
+        color: #000;
+      }
 
       .saleButtons {
         display: flex;
@@ -116,14 +133,12 @@ export const Container = styled.div`
     padding: 1rem;
 
     h2 {
-      font-weight: 500;
-      font-size: 16px;
-      color: var(--grey-01);
+      font-family: "Lexend";
     }
 
     svg {
       font-size: 20px;
-      color: var(--grey4);
+      color: var(--grey-04);
       cursor: pointer;
       width: 30px;
 

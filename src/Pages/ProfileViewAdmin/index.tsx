@@ -1,5 +1,6 @@
 import { Footer } from "../../components/Footer";
 import NavbarLogged from "../../components/NavbarLogged";
+import { useState } from "react";
 import {
   ProfileContent,
   ProfileHeader,
@@ -10,16 +11,23 @@ import {
   BackgroundHeaderStyled,
   BackPageStyled,
 } from "./style";
+import CreateProductModal from "../../components/CreateProductModal";
 
 const ProfileViewAdmin = () => {
+  const [showCreateProductModal, setShowCreateProductModal] = useState(false);
+
   return (
     <BackPageStyled>
+      {showCreateProductModal && (
+        <CreateProductModal
+          setShowCreateProductModal={setShowCreateProductModal}
+        />
+      )}
       <NavbarLogged />
-      
-      <BackgroundHeaderStyled className="background"></BackgroundHeaderStyled>
-      
-      <ProfileHeader>
 
+      <BackgroundHeaderStyled className="background"></BackgroundHeaderStyled>
+
+      <ProfileHeader>
         <ProfileContent>
           <ButtonLoginStyled>SL</ButtonLoginStyled>
 
@@ -34,9 +42,12 @@ const ProfileViewAdmin = () => {
             ever since the 1500s
           </DescriptionProfile>
 
-          <ButtonCreateAnnouncement>Criar Anúncio</ButtonCreateAnnouncement>
+          <ButtonCreateAnnouncement
+            onClick={() => setShowCreateProductModal(true)}
+          >
+            Criar Anúncio
+          </ButtonCreateAnnouncement>
         </ProfileContent>
-
       </ProfileHeader>
       <Footer />
     </BackPageStyled>
