@@ -44,7 +44,7 @@ export const Form = styled.form`
         font-size: 16px;
         font-family: "Inter";
         font-weight: 400;
-        color: var(--grey3);
+        color: var(--grey-03);
       }
     }
 

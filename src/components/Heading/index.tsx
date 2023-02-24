@@ -32,17 +32,24 @@ const theme = {
 export type HeadingProps = {
   color?: keyof typeof theme.colors;
   size?: keyof typeof theme.sizes;
-  fontWeigth?: 700 | 600 | 500;
+  fontWeight?: 700 | 600 | 500;
+  lineHeight?: number;
   level?: 1 | 2 | 3 | 4 | 5 | 6;
 };
 
 export const Heading = styled("h1").attrs<HeadingProps>(({ level }) => ({
   as: `h${level}`,
 }))<HeadingProps>`
-  ${({ color = "grey00", size = "normal", fontWeigth = 700 }) => css`
+  ${({
+    color = "grey00",
+    size = "normal",
+    fontWeight = 700,
+    lineHeight,
+  }) => css`
     font-size: ${theme.sizes[size]};
     color: ${theme.colors[color]};
-    font-weight: ${fontWeigth};
+    font-weight: ${fontWeight};
+    line-height: ${lineHeight}px;
   `}
 `;
 
@@ -51,10 +58,10 @@ const HeadingTest = (): JSX.Element => {
   return (
     <>
       <Heading level={1}>Será que deu certo?</Heading>
-      <Heading level={2} fontWeigth={700} color={"brand02"}>
+      <Heading level={2} fontWeight={700} color={"brand02"}>
         Será que deu certo?
       </Heading>
-      <Heading level={3} fontWeigth={700} color={"brand04"} size={"large"}>
+      <Heading level={3} fontWeight={700} color={"brand04"} size={"large"}>
         Será que deu certo?
       </Heading>
     </>
