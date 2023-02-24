@@ -14,6 +14,7 @@ import {
 } from "./style";
 import CreateProductModal from "../../components/CreateProductModal";
 
+
 const ProfileViewAdmin = () => {
   const [showCreateProductModal, setShowCreateProductModal] = useState(false);
 
@@ -31,7 +32,6 @@ const ProfileViewAdmin = () => {
       <ProfileHeader>
         <ProfileContent>
           <ButtonLoginStyled>SL</ButtonLoginStyled>
-
           <ContentTitleStyled>
             <p>Nome do Usuário</p>
             <small>Anunciante</small>

@@ -3,6 +3,7 @@ import { HiMenu } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
 import { FiSettings } from "react-icons/fi";
 
+
 import {
   NavStyled,
   MenuIconStyled,
@@ -59,6 +60,9 @@ const NavbarLogged = () => {
               <button>Sair</button>
             </div>
           </EditPerfilHeaderModalStyled>
+<<<<<<< HEAD
+          <ButtonLoginStyled>NU</ButtonLoginStyled>
+=======
 
           <ButtonLoginStyled onClick={() => setVisible(!visible)}>
             NU
@@ -72,6 +76,7 @@ const NavbarLogged = () => {
             <button>Sair</button>
           </ButtonsEditHeader>
 
+>>>>>>> a84fab9f0985e5cc457c430e73a966ae7e1d76a4
           <ButtonRegisterStyled>Nome do Usuário</ButtonRegisterStyled>
         </MenuLinks>
       </NavContent>
