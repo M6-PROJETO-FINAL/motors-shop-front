@@ -49,7 +49,7 @@ export const MenuIconStyled = styled.div.attrs((props: PropTypeBg) => ({
   @media ${device.laptop} {
     display: flex;
     align-items: center;
-    position: fixed;
+    position: static;
     cursor: pointer;
   }
 `;
@@ -66,6 +66,7 @@ export const MenuLinks = styled.ul<PropTypeBg>`
   > svg {
     display: none;
     overflow: hidden;
+    position: static;
   }
 
   li {

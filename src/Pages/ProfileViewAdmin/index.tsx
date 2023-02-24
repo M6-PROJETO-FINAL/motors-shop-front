@@ -1,3 +1,4 @@
+import CarouselProducts from "../../components/CarouselProducts";
 import { Footer } from "../../components/Footer";
 import NavbarLogged from "../../components/NavbarLogged";
 import {
@@ -38,6 +39,7 @@ const ProfileViewAdmin = () => {
         </ProfileContent>
 
       </ProfileHeader>
+      {/* <CarouselProducts /> */}
       <Footer />
     </BackPageStyled>
   );
