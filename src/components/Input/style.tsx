@@ -9,16 +9,16 @@ export const InputStyled = styled.input<InputProps>`
   padding: 0.6rem;
   background-color: var(--whiteFixed);
   color: var(--grey0);
-  border: 0.12rem solid var(--grey7);
+  border: 0.12rem solid var(--grey-07);
   border-radius: 0.2rem;
 
   &:hover {
-    background-color: var(--grey8);
-    border: 0.1rem solid var(--grey8);
+    background-color: var(--grey-08);
+    border: 0.1rem solid var(--grey-08);
   }
 
   &:focus {
-    outline: 0.1rem solid var(--brand2);
+    outline: 0.1rem solid var(--brand-02);
   }
 `;
 
@@ -47,7 +47,7 @@ export const StyledDiv = styled.div<InputProps>`
 
   .label--error > label > p {
     font-size: 0.875rem;
-    color: var(--alert1);
+    color: var(--alert-1);
     font-style: italic;
   }
 `;

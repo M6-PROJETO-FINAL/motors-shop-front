@@ -29,6 +29,7 @@ export default createGlobalStyle`
     --grey-10: #FDFDFD;
 
     --white: #ffffff;
+    --whiteFixed: #ffffff;
 
     --alert-1: #CD2B31;
     --alert-2: #FDD8D8;
@@ -81,5 +82,3 @@ export default createGlobalStyle`
     cursor: pointer;
   }
 `;
-
-

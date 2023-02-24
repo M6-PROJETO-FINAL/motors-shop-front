@@ -17,3 +17,20 @@ export interface IVehicleComment {
   };
   text: string;
 }
+
+export interface IVehicleRegister {
+  name: string;
+  description: string;
+  km: number;
+  year: number;
+  coverImage: string;
+  price: number;
+  type: string;
+  vehicleImages?: { id: string; url: string }[];
+  photo1: string;
+  photo2?: string;
+  photo3?: string;
+  photo4?: string;
+  photo5?: string;
+  photo6?: string;
+}
