@@ -5,6 +5,7 @@ export const CarouselProductsContainer = styled.div`
   gap: 12px;
   overflow-x: scroll;
   padding-bottom: 10px;
+  margin: 60px;
 
   &::-webkit-scrollbar {
     width: 10px;

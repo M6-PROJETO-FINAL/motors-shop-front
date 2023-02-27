@@ -14,6 +14,57 @@ import {
 } from "./style";
 import CreateProductModal from "../../components/CreateProductModal";
 
+const products = [
+  {
+    id: 1,
+    name: "Gol",
+    description: "Carro bom, um clássico!",
+    km: 25.0,
+    year: 1996,
+    coverImage: "https://cdn.wheel-size.com/automobile/body/volkswagen-gol-1995-1999-1486457284.69.jpeg",
+    price: 5.0,
+    type: "car",
+    user: {
+      id: 1,
+      fullName: "Erica Lopes",
+      description: "vendedora de carros",
+      cellPhone: "1499819373",
+    },
+  },
+  {
+    id:2,
+    name: "Golf",
+    description: "um clássico!",
+    km: 25.0,
+    year: 1996,
+    coverImage: "https://heycar.com.br/images/2018/Maio/Golf-1995.jpg",
+    price: 5.0,
+    type: "car",
+    user: {
+      id: 1,
+      fullName: "Erica Lopes",
+      description: "vendedora de carros",
+      cellPhone: "1499819373",
+    },
+  },
+  {
+    id:3,
+    name: "Golf",
+    description: "um clássico!",
+    km: 25.0,
+    year: 1996,
+    coverImage: "https://heycar.com.br/images/2018/Maio/Golf-1995.jpg",
+    price: 5.0,
+    type: "motocycle",
+    user: {
+      id: 1,
+      fullName: "Erica Lopes",
+      description: "vendedora de carros",
+      cellPhone: "1499819373",
+    },
+  },
+];
+
 
 const ProfileViewAdmin = () => {
   const [showCreateProductModal, setShowCreateProductModal] = useState(false);
@@ -50,7 +101,7 @@ const ProfileViewAdmin = () => {
           </ButtonCreateAnnouncement>
         </ProfileContent>
       </ProfileHeader>
-      {/* <CarouselProducts /> */}
+      <CarouselProducts props={"car"}  arr={products} />
       <Footer />
     </BackPageStyled>
   );

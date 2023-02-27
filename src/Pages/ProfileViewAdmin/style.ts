@@ -9,7 +9,7 @@ export const BackPageStyled = styled.main`
 export const BackgroundHeaderStyled = styled.div`
   position: absolute;
   width: 100%;
-  height: 357px;
+  height: 250px;
   background-color: var(--brand-01);
 `;
 

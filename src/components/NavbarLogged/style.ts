@@ -237,8 +237,6 @@ export const EditPerfilHeaderModalStyled = styled.div`
   }
 `;
 
-<<<<<<< HEAD
-=======
 export const ButtonsEditHeader = styled.div<PropTypeBg>`
   display: ${({ visible }: PropTypeBg) => (visible ? "block" : "none")};
   flex-flow: column nowrap;
@@ -292,4 +290,3 @@ export const ButtonsEditHeader = styled.div<PropTypeBg>`
     overflow: hidden;
   }
 `;
->>>>>>> a84fab9f0985e5cc457c430e73a966ae7e1d76a4

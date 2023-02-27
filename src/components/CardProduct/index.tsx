@@ -17,7 +17,12 @@ function CardProdut({ product }: any) {
   return (
     <CardProductContainer>
       <div className="product-image" onClick={() => openProduct(product.id)}>
-        <img src={product.coverImage} alt={product.name} width={310} />
+        <img
+          src={product.coverImage}
+          alt={product.name}
+          width={310}
+          height={152}
+        />
       </div>
       <h2 className="product-title" onClick={() => openProduct(product.id)}>
         {product.name}

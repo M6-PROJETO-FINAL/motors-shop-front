@@ -7,12 +7,12 @@ export const CardProductContainer = styled.div`
   max-width: 312px;
 
   .product-image {
-    background-color: var(--grey7);
+    background-color: var(--grey-07);
     display: flex;
     align-items: center;
     justify-content: center;
     max-width: 312px;
-    height: 170px;
+    height: 152px;
     cursor: pointer;
 
     :hover {
@@ -26,7 +26,7 @@ export const CardProductContainer = styled.div`
     font-weight: 600;
     font-size: 16px;
     line-height: 20px;
-    color: var(--grey1);
+    color: var(--grey-01);
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -41,7 +41,7 @@ export const CardProductContainer = styled.div`
     font-weight: 400;
     font-size: 14px;
     line-height: 24px;
-    color: var(--grey2);
+    color: var(--grey-02);
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -54,16 +54,19 @@ export const CardProductContainer = styled.div`
     gap: 8px;
     align-items: center;
 
+
     .owner-initials {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      text-align: center;
       width: 32px;
       height: 32px;
-      background-color: var(--brand1);
+      background-color: var(--brand-01);
       border-radius: 150px;
       cursor: pointer;
+      padding: 0.5rem;
 
       p {
         font-family: "Inter", sans-serif;
@@ -103,14 +106,14 @@ export const CardProductContainer = styled.div`
         padding: 4px 8px;
         gap: 10px;
         height: 32px;
-        background: var(--brand4);
+        background: var(--brand-04);
         border-radius: 4px;
         font-family: "Inter";
         font-style: normal;
         font-weight: 500;
         font-size: 14px;
         line-height: 24px;
-        color: var(--brand1);
+        color: var(--brand-01);
       }
     }
 
@@ -120,7 +123,8 @@ export const CardProductContainer = styled.div`
       font-weight: 500;
       font-size: 16px;
       line-height: 20px;
-      color: var(--grey1);
+      color: var(--grey-01);
+      text-align: right;
     }
   }
 `;
