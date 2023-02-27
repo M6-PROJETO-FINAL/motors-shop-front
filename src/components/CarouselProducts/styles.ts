@@ -1,28 +1,30 @@
 import styled from "styled-components";
 
-export const CarouselProductsContainer = styled.div`
+export const CarouselProductsContainer = styled.ul`
   display: flex;
-  gap: 12px;
   overflow-x: scroll;
-  padding-bottom: 10px;
-  margin: 60px;
+  padding-bottom: 120px;
+  margin: 40px 60px;
+  gap: 48px;
 
   &::-webkit-scrollbar {
     width: 10px;
   }
 
   &::-webkit-scrollbar-track {
-    background: var(--grey10);
+    background: var(--grey-05);
+    border-radius: 10px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: var(--brand1);
-    border: 5px solid var(--grey10);
+    background-color: var(--brand-03);
+    border: 1px solid var(--grey-04);
+    border-radius: 10px;
   }
 
   @media (min-width: 800px) {
     gap: 48px;
-    padding-bottom: 12px;
+    padding-bottom: 110px;
     overflow-x: auto;
   }
 `;

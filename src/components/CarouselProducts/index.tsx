@@ -13,6 +13,7 @@ function CarouselProducts({ props, arr }: any) {
 
   return (
     <CarouselProductsContainer>
+
       {props === "car" ? (
         !isCar ? (
           <p>Nenhum Carro Cadastrado</p>
@@ -20,7 +21,7 @@ function CarouselProducts({ props, arr }: any) {
           arr?.map(
             (product: any) =>
               product.type === props && (
-                <CardProdut key={product.id} product={product} />
+                <CardProdut key={product.id} product={product}  />
               )
           )
         )

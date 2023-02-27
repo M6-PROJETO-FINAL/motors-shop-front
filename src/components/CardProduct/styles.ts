@@ -1,23 +1,38 @@
 import styled from "styled-components";
 
-export const CardProductContainer = styled.div`
+export const CardProductContainer = styled.li`
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
   max-width: 312px;
+
+  li {
+    justify-content: space-around;
+    height: 220px;
+  }
 
   .product-image {
     background-color: var(--grey-07);
     display: flex;
     align-items: center;
     justify-content: center;
-    max-width: 312px;
+    max-width: 310px;
     height: 152px;
     cursor: pointer;
+    width: 100%;
+    margin: auto;
+
+    padding: none;
 
     :hover {
-      border: 1px solid var(--brand1);
+      border: 1px solid var(--brand-01);
     }
+  }
+
+  img {
+    width: 310px;
+    height: 152px;
+    object-fit: cover;
   }
 
   .product-title {
@@ -53,7 +68,6 @@ export const CardProductContainer = styled.div`
     display: flex;
     gap: 8px;
     align-items: center;
-
 
     .owner-initials {
       display: flex;

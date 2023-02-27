@@ -7,8 +7,6 @@ const ProductPage = () => {
     <>
       <NavbarLogged />
       <BackgroundHeaderStyled className="background"></BackgroundHeaderStyled>
-      
-
       <Footer />
     </>
   );

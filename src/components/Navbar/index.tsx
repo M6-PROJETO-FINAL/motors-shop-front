@@ -32,13 +32,13 @@ const Navbar = () => {
         <MenuLinks visible={visible}>
           <IoClose size={28} onClick={() => setVisible(false)}/>
           <li>
-            <a href="#cars">Carros</a>
+            <a href={"#cars"}>Carros</a>
           </li>
           <li>
-            <a href="#motocicle">Motos</a>
+            <a href={"#motorcycle"}>Motos</a>
           </li>
           <li>
-            <a href="auction">Leilão</a>
+            <a href={"auction"}>Leilão</a>
           </li>
 
           <DivLineHeaderStyled></DivLineHeaderStyled>
