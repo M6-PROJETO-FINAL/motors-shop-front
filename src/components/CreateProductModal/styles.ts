@@ -25,7 +25,9 @@ export const Container = styled.div`
 
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    /* gap: 1rem; */
+
+    font-family: "Inter";
 
     p {
       color: var(--grey-00);
@@ -64,6 +66,7 @@ export const Container = styled.div`
       .saleButtons {
         display: flex;
         gap: 1rem;
+        
 
         .notSelected {
           background-color: var(--whiteFixed);
@@ -71,6 +74,7 @@ export const Container = styled.div`
           color: var(--grey0);
           font-size: 16px;
           font-weight: 600;
+          font-family: "Inter";
 
           border: 0.14rem solid var(--grey-05);
           border-radius: 4px;
@@ -91,6 +95,7 @@ export const Container = styled.div`
           color: var(--whiteFixed);
           font-size: 16px;
           font-weight: 600;
+          font-family: "Inter";
 
           border: none;
           border-radius: 4px;
@@ -128,12 +133,11 @@ export const Container = styled.div`
     width: 100%;
 
     margin-top: 0.2rem;
-    margin-bottom: 1rem;
 
     padding: 1rem;
 
     h2 {
-      font-family: "Lexend";
+      font-family: "Inter";
     }
 
     svg {

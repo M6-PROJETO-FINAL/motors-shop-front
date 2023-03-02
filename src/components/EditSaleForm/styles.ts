@@ -13,15 +13,19 @@ export const Form = styled.form`
 
   border-radius: 8px;
 
+  font-family: "Inter";
+
   .description {
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
+    font-size: 14px;
 
     label {
       font-size: 0.875rem;
       font-weight: 500;
       color: var(--grey-00);
+      font-family: "Inter";
     }
 
     textarea {
@@ -41,10 +45,10 @@ export const Form = styled.form`
       }
 
       &::placeholder {
-        font-size: 16px;
+        font-size: 14px;
         font-family: "Inter";
         font-weight: 400;
-        color: var(--grey3);
+        color: var(--grey-03);
       }
     }
 
@@ -55,7 +59,8 @@ export const Form = styled.form`
     }
   }
 
-  .choose-vehicle {
+  .choose-vehicle,
+  .published {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -72,6 +77,7 @@ export const Form = styled.form`
         color: var(--grey0);
         font-size: 16px;
         font-weight: 600;
+        font-family: "Inter";
 
         border: 0.14rem solid var(--grey-05);
         border-radius: 4px;
@@ -92,6 +98,7 @@ export const Form = styled.form`
         color: var(--whiteFixed);
         font-size: 16px;
         font-weight: 600;
+        font-family: "Inter";
 
         border: none;
         border-radius: 4px;
@@ -108,6 +115,10 @@ export const Form = styled.form`
     }
   }
 
+  .published {
+    margin-bottom: 1rem;
+  }
+
   .final-buttons {
     display: flex;
     gap: 1rem;
@@ -120,6 +131,7 @@ export const Form = styled.form`
       color: var(--grey2);
       font-size: 16px;
       font-weight: 600;
+      font-family: "Inter";
 
       border: none;
       border-radius: 4px;
@@ -140,6 +152,7 @@ export const Form = styled.form`
       color: var(--whiteFixed);
       font-size: 16px;
       font-weight: 600;
+      font-family: "Inter";
 
       border: none;
       border-radius: 4px;

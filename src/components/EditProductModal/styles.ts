@@ -25,7 +25,9 @@ export const Container = styled.div`
 
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    /* gap: 1rem; */
+
+    font-family: "Inter";
 
     p {
       color: var(--grey-00);
@@ -35,6 +37,7 @@ export const Container = styled.div`
 
     .vehicleInfo {
       padding: 1rem;
+      
     }
 
     .saleType {
@@ -54,6 +57,7 @@ export const Container = styled.div`
           color: var(--grey0);
           font-size: 16px;
           font-weight: 600;
+          font-family: "Inter";
 
           border: 0.14rem solid var(--grey-05);
           border-radius: 4px;
@@ -74,6 +78,7 @@ export const Container = styled.div`
           color: var(--whiteFixed);
           font-size: 16px;
           font-weight: 600;
+          font-family: "Inter";
 
           border: none;
           border-radius: 4px;
@@ -123,7 +128,7 @@ export const Container = styled.div`
 
     svg {
       font-size: 20px;
-      color: var(--grey4);
+      color: var(--grey-04);
       cursor: pointer;
       width: 30px;
 

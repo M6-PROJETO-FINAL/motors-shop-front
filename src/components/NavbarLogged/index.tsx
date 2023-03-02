@@ -61,8 +61,6 @@ const NavbarLogged = () => {
             </div>
           </EditPerfilHeaderModalStyled>
 
-          <ButtonLoginStyled>NU</ButtonLoginStyled>
-
           <ButtonLoginStyled onClick={() => setVisible(!visible)}>
             NU
           </ButtonLoginStyled>
