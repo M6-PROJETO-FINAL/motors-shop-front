@@ -8,6 +8,7 @@ import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import EditCommentModal from "../EditCommentModal";
 import { SuccessModal } from "../Modal";
 import { CommentDiv } from "./styles";
+import { BsFillCircleFill } from "react-icons/bs";
 
 interface CommentProps {
   userName: string;
@@ -67,13 +68,19 @@ function CommentCard({ userName, commentDate, text, commentId }: CommentProps) {
           text="Agora você poderá ver seus comentários modificados"
         />
       )}
+      <h2>Comentários</h2>
+
       <div className="userInfo">
         <div className="sellerPhoto">
           <p>{userInitials(userName)}</p>
         </div>
         <p className="userName">{userName}</p>
-        <span className="date">{calculateTimePassed(commentDate)}</span>
+        <div className="time">
+          <BsFillCircleFill size={5} />
+          <span className="date">{calculateTimePassed(commentDate)}</span>
+        </div>
       </div>
+
       <div className="text">{text}</div>
       {comment.user?.id === userId && (
         <>

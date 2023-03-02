@@ -14,7 +14,7 @@ function EditProductModal({
     <Container>
       <div className="modal">
         <header>
-          <h2>Criar anúncio</h2>
+          <h2>Editar anúncio</h2>
           <MdClose onClick={() => setShowEditProductModal(false)} />
         </header>
 

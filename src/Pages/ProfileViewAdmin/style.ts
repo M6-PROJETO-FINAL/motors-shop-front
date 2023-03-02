@@ -122,4 +122,9 @@ export const ButtonCreateAnnouncement = styled.button`
   font-weight: 600;
   border-radius: 4px;
   color: var(--brand-01);
+
+  &:hover {
+    background-color: var(--brand-04);
+    border: 2px solid var(--brand-01);
+  }
 `;

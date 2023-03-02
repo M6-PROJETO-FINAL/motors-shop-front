@@ -1,36 +1,93 @@
 import styled from "styled-components";
 
 export const CommentDiv = styled.div`
+  width: 752px;
+  height: 557px;
   display: flex;
   flex-direction: column;
+  border-radius: 4px;
   gap: 12px;
+  background-color: var(--white);
+  color: var(--grey-01);
+  padding: 2rem;
+  overflow-x: auto;
+  margin-bottom: 33px;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--grey-05);
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--brand-03);
+    border: 1px solid var(--grey-04);
+    border-radius: 10px;
+  }
+
+  h2 {
+    font-family: "Lexend";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    margin-bottom: 28px;
+  }
 
   .userInfo {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    
 
     .sellerPhoto {
-      background-color: var(--random10);
+      background-color: var(--random-10);
       color: var(--whiteFixed);
 
       display: flex;
       align-items: center;
-      justify-content: center;
+      margin-right: 16px;
 
-      width: 32px;
-      height: 32px;
+      width: 30px;
+      height: 30px;
 
-      border-radius: 50px;
+      font-weight: 500;
+      font-size: 13px;
+
+      border-radius: 50%;
+      font-family: "Inter";
+
+      padding: 1rem;
+
+      p {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+      }
     }
 
     .userName {
+      max-width: 25ch;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
       font-family: Inter;
       font-weight: 500;
       font-size: 14px;
-      line-height: 24px;
 
-      color: var(--grey1);
+      color: var(--grey-01);
+    }
+
+    .time {
+      display: flex;
+      align-items: center;
+
+      color: var(--grey-03);
+
+      margin: 0;
+      padding: 0%;
+      width: 20%;
     }
 
     .date {
@@ -39,7 +96,7 @@ export const CommentDiv = styled.div`
       font-size: 12px;
       line-height: 24px;
 
-      color: var(--grey3);
+      color: var(--grey-03);
     }
   }
 
@@ -49,7 +106,9 @@ export const CommentDiv = styled.div`
     font-size: 14px;
     line-height: 24px;
 
-    color: var(--grey2);
+    color: var(--grey-02);
+
+    margin-bottom: 48px;
   }
 
   .buttons {
@@ -65,15 +124,15 @@ export const CommentDiv = styled.div`
       width: 30px;
       height: 30px;
 
-      background-color: var(--grey10);
+      background-color: var(--grey-10);
       border: none;
       border-radius: 4px;
 
-      color: var(--grey2);
+      color: var(--grey-02);
 
       &:hover {
-        background-color: var(--grey2);
-        color: var(--grey10);
+        background-color: var(--grey-02);
+        color: var(--grey-10);
       }
     }
 
@@ -85,14 +144,14 @@ export const CommentDiv = styled.div`
       width: 30px;
       height: 30px;
 
-      background-color: var(--grey10);
+      background-color: var(--grey-10);
       border: none;
       border-radius: 4px;
 
-      color: var(--alert1);
+      color: var(--alert-1);
 
       &:hover {
-        background-color: var(--alert1);
+        background-color: var(--alert-1);
         color: var(--whiteFixed);
       }
     }

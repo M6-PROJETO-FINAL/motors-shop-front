@@ -21,7 +21,6 @@ export const CardProductContainer = styled.li`
     cursor: pointer;
     width: 100%;
     margin: auto;
-
     padding: none;
 
     :hover {

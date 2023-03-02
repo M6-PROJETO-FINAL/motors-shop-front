@@ -219,6 +219,26 @@ function EditSaleForm({
         </div>
       </div>
 
+      <div className="published">
+        <p>Publicado</p>
+        <div className="buttons">
+          <button
+            className={vehicleType === "car" ? "selected" : "notSelected"}
+            type="button"
+            onClick={() => setVehicleType("car")}
+          >
+            Sim
+          </button>
+          <button
+            className={vehicleType === "car" ? "notSelected" : "selected"}
+            type="button"
+            onClick={() => setVehicleType("motorcycle")}
+          >
+            Não
+          </button>
+        </div>
+      </div>
+
       <InputBase
         width="100%"
         type="text"
