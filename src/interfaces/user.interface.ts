@@ -33,7 +33,7 @@ export interface IUserRequest {
   email: string;
   cpf: string;
   cellPhone: string;
-  birthDate: string;
+  birthdate: string;
   description?: string;
   isSeller: boolean;
   password: string;

@@ -136,6 +136,11 @@ export const Button = styled.button<ButtonProps>`
           color: var(--grey-00);
           background-color: transparent;
           border: 1px solid var(--grey-04);
+
+          &:hover {
+            background-color: var(--brand-04);
+            border: 1px solid var(--brand-01);
+          }
         `;
 
       case "OutlineBrand":

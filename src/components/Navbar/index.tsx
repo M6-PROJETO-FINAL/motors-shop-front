@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import logo from "../../assets/img/motors-shop.svg";
 import { HiMenu } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
@@ -13,8 +14,10 @@ import {
   DivLineHeaderStyled,
 } from "./style";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [visible, setVisible] = useState(false);
   return (
     <NavStyled>
@@ -30,7 +33,7 @@ const Navbar = () => {
         </MenuIconStyled>
 
         <MenuLinks visible={visible}>
-          <IoClose size={28} onClick={() => setVisible(false)}/>
+          <IoClose size={28} onClick={() => setVisible(false)} />
           <li>
             <a href={"#cars"}>Carros</a>
           </li>
@@ -43,8 +46,14 @@ const Navbar = () => {
 
           <DivLineHeaderStyled></DivLineHeaderStyled>
 
-          <ButtonLoginStyled>Fazer Login</ButtonLoginStyled>
-          <ButtonRegisterStyled>Cadastrar</ButtonRegisterStyled>
+          <Link to="/login">
+            <ButtonLoginStyled>Fazer Login</ButtonLoginStyled>
+          </Link>
+
+          <Link to="/register">
+            {" "}
+            <ButtonRegisterStyled>Cadastrar</ButtonRegisterStyled>
+          </Link>
         </MenuLinks>
       </NavContent>
     </NavStyled>

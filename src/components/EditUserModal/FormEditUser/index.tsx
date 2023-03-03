@@ -81,7 +81,7 @@ export const FormEditUser: React.FC<IModal> = ({
       defaultValues.email = user.email;
       defaultValues.cpf = user.cpf;
       defaultValues.cellPhone = user.cellPhone;
-      defaultValues.birthDate = user.birthDate.slice(0, 10);
+      defaultValues.birthdate = user.birthdate.slice(0, 10);
       defaultValues.description = user.description;
 
       reset({ ...defaultValues });

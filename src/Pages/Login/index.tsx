@@ -1,10 +1,15 @@
-// criando template
+import { Footer } from "../../components/Footer";
+import LoginUser from "../../components/LoginUser";
+import Navbar from "../../components/Navbar";
+import { Main } from "./style";
 
 const LoginPage = () => {
   return (
-    <main>
-      <h1>Página de Login!!</h1>
-    </main>
+    <Main>
+      <Navbar />
+      <LoginUser />
+      <Footer />
+    </Main>
   );
 };
 
