@@ -2,9 +2,9 @@ import { Route, Routes, Navigate } from "react-router-dom";
 
 import HomePage from "../Pages/Home";
 import LoginPage from "../Pages/Login";
-import ProductPage from "../Pages/Product";
-import ProfileViewAdmin from "../Pages/ProfileViewAdmin";
 import RegisterPage from "../Pages/Register";
+import ProfileViewAdmin from "../Pages/ProfileViewAdmin";
+import ProductPage from "../Pages/Product";
 
 export const RoutesMain = () => {
   return (

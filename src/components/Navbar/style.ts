@@ -9,6 +9,7 @@ export const NavStyled = styled.nav`
   align-items: center;
   border-bottom: 2px solid var(--grey-07);
   font-family: "Inter";
+  background-color: var(--white);
 `;
 
 export const NavContent = styled.div`
