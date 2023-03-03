@@ -11,6 +11,10 @@ export const InputStyled = styled.input<InputProps>`
   color: var(--grey0);
   border: 0.12rem solid var(--grey-07);
   border-radius: 0.2rem;
+  margin-bottom: 20px;
+
+  font-size: 14px;
+  font-family: "Inter";
 
   &:hover {
     background-color: var(--grey-08);

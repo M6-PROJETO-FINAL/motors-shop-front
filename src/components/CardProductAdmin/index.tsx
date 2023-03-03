@@ -59,6 +59,7 @@ function CardProductAdmin({ product, sellerName, sellerId }: any) {
           {sellerName}
         </p>
       </div>
+
       <div className="product-details">
         <div>
           <span>{product.km}</span>
@@ -71,9 +72,24 @@ function CardProductAdmin({ product, sellerName, sellerId }: any) {
           })}
         </p>
       </div>
+
       <div className="product-btns-admin">
-        <Button onClick={() => handleModal()}>Editar</Button>
-        <Button onClick={() => openProductPage()}>Ver como</Button>
+        <Button
+          type="button"
+          colorbutton="Outline1"
+          width="40%"
+          onClick={() => handleModal()}
+        >
+          Editar
+        </Button>
+        <Button
+          type="button"
+          colorbutton="Outline1"
+          width="45"
+          onClick={() => openProductPage()}
+        >
+          Ver como
+        </Button>
       </div>
     </CardProductContainer>
   );

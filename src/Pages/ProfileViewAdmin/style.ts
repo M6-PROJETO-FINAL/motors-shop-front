@@ -9,7 +9,7 @@ export const BackPageStyled = styled.main`
 export const BackgroundHeaderStyled = styled.div`
   position: absolute;
   width: 100%;
-  height: 357px;
+  height: 250px;
   background-color: var(--brand-01);
 `;
 
@@ -122,4 +122,9 @@ export const ButtonCreateAnnouncement = styled.button`
   font-weight: 600;
   border-radius: 4px;
   color: var(--brand-01);
+
+  &:hover {
+    background-color: var(--brand-04);
+    border: 2px solid var(--brand-01);
+  }
 `;

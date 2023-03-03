@@ -13,15 +13,19 @@ export const Form = styled.form`
 
   border-radius: 8px;
 
+  font-family: "Inter";
+
   .description {
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
+    font-size: 14px;
 
     label {
       font-size: 0.875rem;
       font-weight: 500;
       color: var(--grey-00);
+      font-family: "Inter";
     }
 
     textarea {
@@ -41,7 +45,8 @@ export const Form = styled.form`
       }
 
       &::placeholder {
-        font-size: 16px;
+        font-family: "Inter";
+        font-size: 14px;
         font-family: "Inter";
         font-weight: 400;
         color: var(--grey-03);
@@ -61,6 +66,7 @@ export const Form = styled.form`
     gap: 1rem;
 
     margin-top: 1rem;
+    margin-bottom: 1rem;
 
     .buttons {
       display: flex;
@@ -78,6 +84,8 @@ export const Form = styled.form`
 
         width: 100%;
         height: 48px;
+
+        font-family: "Inter";
 
         &:hover {
           background-color: var(--brand-01);
@@ -98,6 +106,8 @@ export const Form = styled.form`
 
         width: 100%;
         height: 48px;
+
+        font-family: "Inter";
 
         &:hover {
           background-color: var(--brand-03);
@@ -127,6 +137,8 @@ export const Form = styled.form`
       width: 100%;
       height: 48px;
 
+      font-family: "Inter";
+
       &:hover {
         background-color: var(--grey-03);
         color: var(--whiteFixed);
@@ -146,6 +158,8 @@ export const Form = styled.form`
 
       width: 100%;
       height: 48px;
+
+      font-family: "Inter";
 
       &:hover {
         background-color: var(--brand-01);
