@@ -179,26 +179,27 @@ const products = [
 ];
 
 const HomePage = () => {
-  
   const product = {
-    time:"01:58:00",
-    image:"../../assets/.svg",
+    time: "01:58:00",
+    image: "../../assets/.svg",
     title: "Mercedes Benz A 200 CGI ADVANCE SEDAN Mercedes Benz A 200",
-    subtitle: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem...",
-    user:{
-    fullName:"Rodrigo Tavares"  
+    subtitle:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem...",
+    user: {
+      fullName: "Rodrigo Tavares",
     },
     year: "2013",
-    km:"0 KM",
-    price:"R$00.000,00"
-  }
+    km: "0 KM",
+    price: "R$00.000,00",
+  };
 
   return (
     <main>
       <Navbar />
       <Header />
+      <CaroselTitle>Leilão</CaroselTitle>
       <DivContainer>
-        <h1>Leilão</h1>
+        <CardAuction product={product} />
         <CardAuction product={product} />
         <CardAuction product={product} />
       </DivContainer>

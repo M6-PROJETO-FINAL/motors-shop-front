@@ -3,7 +3,6 @@ import { HiMenu } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
 import { FiSettings } from "react-icons/fi";
 
-
 import {
   NavStyled,
   MenuIconStyled,
@@ -17,6 +16,7 @@ import {
   ButtonsEditHeader,
 } from "./style";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const NavbarLogged = () => {
   const [visible, setVisible] = useState(false);
@@ -24,9 +24,11 @@ const NavbarLogged = () => {
     <NavStyled>
       <NavContent>
         <Logotipo className="logo">
-          <a href="#">
-            <img src={logo} alt="" />
-          </a>
+          <Link to="/home">
+            <a href="#">
+              <img src={logo} alt="" />
+            </a>
+          </Link>
         </Logotipo>
 
         <MenuIconStyled onClick={() => setVisible(!visible)}>

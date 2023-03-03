@@ -18,6 +18,7 @@ export const StyledForm = styled.form`
 
   .choose-user {
     display: flex;
+    width: 85%;
     flex-direction: column;
     gap: 1rem;
 

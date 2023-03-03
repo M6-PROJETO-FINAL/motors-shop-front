@@ -1,39 +1,35 @@
-import { CardAuctionContainer } from "./style";
-import { useNavigate } from "react-router-dom";
+import {
+  AuctionBotton,
+  AuctionContainer,
+  AuctionContext,
+  CardAuctionContainer,
+} from "./style";
 import { userInitials } from "../../utils/userInitials";
 import { BsClock } from "react-icons/bs";
-import {BsArrowRight} from "react-icons/bs";
-import { Teste1 } from "./style";
-
+import { BsArrowRight } from "react-icons/bs";
 
 function AuctionCard({ product }: any) {
-  const navigate = useNavigate();
-
-
   return (
-    <Teste1>
-      <CardAuctionContainer>
-        <div className="card-container">
-          <div className="auction-clock">
-            <div className="auction-icon-clock">
-              <BsClock color="#4529E6" size={20}/>
+    <AuctionContainer>
+      <AuctionContext>
+        <CardAuctionContainer>
+          <div className="card-container">
+            <div className="auction-clock">
+              <div className="auction-icon-clock">
+                <BsClock color="#4529E6" size={20} />
+              </div>
+              <div className="auction-time-clock">
+                <p>{product.time}</p>
+              </div>
             </div>
-            <div className="auction-time-clock">
-              <p>{product.time}</p>
-            </div>
-          </div>
-            <h2 className="product-title">
-              {product.title}
-            </h2>
+            <h2 className="product-title">{product.title}</h2>
             <p className="product-subtitle">{product.subtitle}</p>
             <div className="div-product-owner">
-              <div className="owner-initials" >
+              <div className="owner-initials">
                 <p>{userInitials(product.user.fullName)}</p>
               </div>
               <div>
-                <p className="owner-name">
-                  {product.user.fullName}
-                </p>
+                <p className="owner-name">{product.user.fullName}</p>
               </div>
             </div>
             <div className="product-description">
@@ -41,24 +37,23 @@ function AuctionCard({ product }: any) {
                 <p>{product.year}</p>
               </div>
               <div className="product-details">
-                <p>{product.km}</p> 
+                <p>{product.km}</p>
               </div>
               <div className="product-price">
-                <p>{product.price}</p> 
+                <p>{product.price}</p>
               </div>
             </div>
-        </div>
-        <div className="auction-botton">
-          <div>
-            <p>Acessar página do leilão</p>
           </div>
-          <div>
-            <BsArrowRight color="#FFFFFF" size={30}/>
+        </CardAuctionContainer>
+
+        <AuctionBotton>
+          <p>Acessar página do leilão</p>
+          <div className="action-svg">
+            <BsArrowRight color="#FFFFFF" size={30} />
           </div>
-        </div> 
-    </CardAuctionContainer>
-    </Teste1>
-    
+        </AuctionBotton>
+      </AuctionContext>
+    </AuctionContainer>
   );
 }
 
