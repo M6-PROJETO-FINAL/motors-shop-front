@@ -2,7 +2,7 @@ import { CardProductContainer } from "./styles";
 import { useNavigate } from "react-router-dom";
 import { userInitials } from "../../utils/userInitials";
 
-function CardProdut({ product }: any) {
+function CardProduct({ product }: any) {
   const navigate = useNavigate();
 
   const openProduct = (id: string) => {
@@ -47,4 +47,4 @@ function CardProdut({ product }: any) {
   );
 }
 
-export default CardProdut;
+export default CardProduct;

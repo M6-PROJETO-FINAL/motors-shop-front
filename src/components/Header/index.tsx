@@ -19,7 +19,7 @@ const Header = () =>{
                     <ButtonCars onClick={() => handlerCars}/>
                     <ButtonRides onClick={() => handlerRides} />
                 </DivButton>
-            </HeaderContent>
+        </HeaderContent>
 
         </HeaderStyled>
 
