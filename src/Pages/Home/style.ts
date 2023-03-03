@@ -1,5 +1,10 @@
-import styled from "styled-components";
+import styled, { StyledComponent } from "styled-components";
 
+export const DivContainer = styled.div`
+display:flex;
+width: 100vw;
+flex-direction: row;
+`
 export const CaroselTitle = styled.h1`
 font-family: "Lexend";
 font-weight: 600;
