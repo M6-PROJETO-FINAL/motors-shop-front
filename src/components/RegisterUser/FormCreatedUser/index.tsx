@@ -3,21 +3,52 @@ import { InputBase } from "../../Input";
 import { StyledForm } from "./style";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { useContext, useState } from "react";
-import { AuthContext } from "../../../context/AuthContext";
+import { useState } from "react";
 import schema from "../../../validators/registerUser";
+import { FieldValues } from "react-hook-form";
+import api from "../../../services/api";
+import { useNavigate } from "react-router-dom";
 
 export const FormCreatedUser = () => {
-  
-  const [userType, setUserType] = useState(false);
+  const navigate = useNavigate();
 
-  const { onSubmitFunction } = useContext(AuthContext);
+  const [userType, setUserType] = useState(false);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
+
+  const onSubmitFunction = async (data: FieldValues) => {
+    const newUser = {
+      fullName: data.fullName,
+      email: data.email,
+      birthdate: data.birthdate,
+      cellPhone: data.cellPhone,
+      cpf: data.cpf,
+      description: data.description,
+      address: {
+        id: "1",
+        zipCode: data.zipCode,
+        state: data.state,
+        city: data.city,
+        street: data.street,
+        number: data.number,
+        complement: data.complement,
+      },
+      isSeller: userType,
+      password: data.password,
+    };
+    console.log(newUser);
+
+    await api
+      .post("/user", newUser)
+      .then((response) => {
+        navigate("/login", { replace: true });
+      })
+      .catch((error) => console.error(error));
+  };
 
   return (
     <>
@@ -152,12 +183,14 @@ export const FormCreatedUser = () => {
             <button
               className={userType === false ? "selected" : "notSelected"}
               type="button"
+              value={"Comprador"}
               onClick={() => setUserType(false)}
             >
               Comprador
             </button>
             <button
               className={userType === true ? "notSelected" : "selected"}
+              value={"Anunciante"}
               type="button"
               onClick={() => setUserType(true)}
             >
@@ -176,7 +209,7 @@ export const FormCreatedUser = () => {
           error={errors?.password?.message}
         ></InputBase>
 
-        {/* <InputBase
+        <InputBase
           width="50%"
           type="password"
           placeholder="Digite novamente a senha"
@@ -184,7 +217,7 @@ export const FormCreatedUser = () => {
           register={register}
           name="confirmPassword"
           error={errors?.confirmPassword?.message}
-        ></InputBase> */}
+        ></InputBase>
 
         <div className="button--box">
           <ButtonBase type="submit" colorbutton="Brand" width="85%">

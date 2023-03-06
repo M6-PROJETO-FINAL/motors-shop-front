@@ -39,6 +39,7 @@ const AuthProvider = ({ children }: IRegisterProviderProps) => {
       isSeller: data.isSeller,
       password: data.password,
     };
+    console.log(newUser);
 
     await api
       .post("/user", newUser)

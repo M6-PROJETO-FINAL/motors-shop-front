@@ -25,9 +25,7 @@ const NavbarLogged = () => {
       <NavContent>
         <Logotipo className="logo">
           <Link to="/home">
-            <a href="#">
               <img src={logo} alt="" />
-            </a>
           </Link>
         </Logotipo>
 
