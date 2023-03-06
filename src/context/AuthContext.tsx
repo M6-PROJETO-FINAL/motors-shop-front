@@ -1,58 +1,71 @@
-import { createContext, ReactNode } from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import { FieldValues } from "react-hook-form";
-import { IUserRequest } from "../interfaces/user.interface";
 
-interface RegisterContextProps {
-  onSubmitFunction: (data: FieldValues) => void;
+interface LoginContextProps {
+  loginUser: (data: FieldValues) => void;
+  logoutUser: () => void;
 }
 
-interface IRegisterProviderProps {
+interface ILoginProviderProps {
   children: ReactNode;
 }
 
-export const AuthContext = createContext<RegisterContextProps>(
-  {} as RegisterContextProps
+export const AuthContext = createContext<LoginContextProps>(
+  {} as LoginContextProps
 );
 
-const AuthProvider = ({ children }: IRegisterProviderProps) => {
+const AuthProvider = ({ children }: ILoginProviderProps) => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   const navigate = useNavigate();
+  
 
-  const onSubmitFunction = async (data: FieldValues) => {
-    const newUser: IUserRequest = {
-      fullName: data.fullName,
-      email: data.email,
-      birthdate: data.birthdate,
-      cellPhone: data.cellPhone,
-      cpf: data.cpf,
-      description: data.description,
-      address: {
-        id: "1",
-        zipCode: data.zipCode,
-        state: data.state,
-        city: data.city,
-        street: data.street,
-        number: data.number,
-        complement: data.complement,
-      },
-      isSeller: data.isSeller,
-      password: data.password,
-    };
-    console.log(newUser);
+  useEffect(() => {
+    async function loadUser() {
+      const token = localStorage.getItem("@TOKEN:token");
+      if (token) {
+        try {
+          api.defaults.headers.authorization = `Bearer ${token}`;
 
+          const { data } = await api.get("/profile");
+          setUser(data);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+      setLoading(false);
+    }
+    loadUser();
+  }, []);
+
+  const loginUser = async (data: FieldValues) => {
     await api
-      .post("/user", newUser)
+      .post("/login", data)
       .then((response) => {
-        navigate("/login", { replace: true });
+        const token = response.data.token;
+
+        api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+        localStorage.clear();
+        localStorage.setItem("@TOKEN: token", token);
+        navigate("/profile", { replace: true });
       })
       .catch((error) => console.error(error));
+  };
+
+  const logoutUser = async () => {
+    localStorage.clear();
+    navigate("/login", { replace: true });
   };
 
   return (
     <AuthContext.Provider
       value={{
-        onSubmitFunction,
+        loginUser,
+        logoutUser,
       }}
     >
       {children}
