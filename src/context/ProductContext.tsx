@@ -14,16 +14,19 @@ interface ProviderProps {
 
 interface IVehicle {
   id: string;
-  name: string;
-  description: string;
-  km: string;
+  type: "sale" | "auction";
+  title: string;
   year: number;
+  km: number;
+  price: number;
+  description: string;
   coverImage: string;
-  price: string;
+  type_veihcle: "sale" | "motor";
+  image_cover: string;
+  first_image: string;
   createdAt: string;
   updatedAt: string;
-  type: string;
-  vehicleImages: { id: string; url: string }[];
+  vehicleImages?: { id: string; url: string }[];
 }
 
 export interface IUser {
@@ -44,18 +47,7 @@ export interface IUser {
   fullName: string;
   id: string;
   isSeller: boolean;
-  vehicle?: {
-    coverImage: string;
-    createdAt: string;
-    description: string;
-    id: string;
-    km: string;
-    name: string;
-    price: string;
-    type: string;
-    updatedAt: string;
-    vehicleImages: { id: string; url: string }[];
-  }[];
+  vehicle?: IVehicle[];
 }
 
 type vehicleContextType = {
@@ -65,6 +57,7 @@ type vehicleContextType = {
   setLogged: React.Dispatch<React.SetStateAction<boolean>>;
   user: IUser | undefined;
   setUser: React.Dispatch<React.SetStateAction<IUser | undefined>>;
+  getAllProducts: () => Promise<void>;
 };
 
 const VehicleContext = createContext<vehicleContextType>(
@@ -90,6 +83,18 @@ export function VehicleProvider({ children }: ProviderProps) {
     }
   }, []);
 
+  const getAllProducts = async () => {
+    await api
+      .get("/vehicles")
+      .then((response) => {
+        console.log(response.data);
+        setAllVehicles(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
     <VehicleContext.Provider
       value={{
@@ -99,6 +104,7 @@ export function VehicleProvider({ children }: ProviderProps) {
         setLogged,
         user,
         setUser,
+        getAllProducts,
       }}
     >
       {children}

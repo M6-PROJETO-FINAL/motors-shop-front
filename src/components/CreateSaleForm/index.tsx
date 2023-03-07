@@ -103,9 +103,6 @@ function CreateSaleForm({ setShowCreateProductModal, saleType }: any) {
       vehicleImages,
     };
 
-    console.log(vehicleData);
-    console.log(userToken);
-
     api
       .post(`vehicles`, vehicleData, {
         headers: { Authorization: `Bearer ${userToken}` },
