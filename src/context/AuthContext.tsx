@@ -2,6 +2,7 @@ import { createContext, ReactNode, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import { FieldValues } from "react-hook-form";
+import { toast } from "react-toastify";
 
 interface LoginContextProps {
   loginUser: (data: FieldValues) => void;
@@ -21,7 +22,6 @@ const AuthProvider = ({ children }: ILoginProviderProps) => {
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
-  
 
   useEffect(() => {
     async function loadUser() {
@@ -50,10 +50,14 @@ const AuthProvider = ({ children }: ILoginProviderProps) => {
         api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
         localStorage.clear();
-        localStorage.setItem("@TOKEN: token", token);
+        localStorage.setItem("@motorsShop:token", token);
+        toast.success("Login efetuado com sucesso!");
         navigate("/profile", { replace: true });
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        toast.error("Ocorreu algum problema");
+        console.error(error);
+      });
   };
 
   const logoutUser = async () => {
