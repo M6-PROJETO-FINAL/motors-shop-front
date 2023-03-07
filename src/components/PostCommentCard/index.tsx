@@ -7,6 +7,7 @@ import EditCommentModal from "../EditCommentModal";
 import { SuccessModal } from "../Modal";
 import { PostCommentDiv } from "./styles";
 import { Button } from "../Button/style";
+import { UpdateApiContext } from "../../context/UpdateApi";
 
 interface CommentProps {
   userName: string;
@@ -21,12 +22,36 @@ function PostCommentCard({
 }: CommentProps) {
   const [showModal, setShowModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
-  const [comment, setComment] = useState({} as any);
+  const [text, setText] = useState("");
+  const { setUpdateApi, updateApi } = useContext(UpdateApiContext);
 
   const { isComment, setIsComment } = useContext(CheckCommentContext);
 
   const userId = localStorage.getItem("@motorsShop:userId");
   const token = localStorage.getItem("@motorsShop:token");
+
+  const handlePost = () =>{
+    const commentData = {
+      text:text
+    };
+    api
+    .post(`/comments`, commentData, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((res) => {
+      toast.success("Anúncio criado com sucesso!");
+      setTimeout(() => {
+        setUpdateApi(!updateApi);
+      }, 2000);
+    })
+    .catch((err) => console.log("Tente novamente mais tarde."));
+  };
+
+  
+
+  const handleChange = (event:any) =>{
+    setText(event.target.value)
+  }
 
   // useEffect(() => {
   //   if (userId !== null) {
@@ -67,13 +92,13 @@ function PostCommentCard({
       <div className="form-content">
         <div className="text-form">
           <form className="text">
-            <textarea placeholder="Carro muito confortável, foi uma ótima experiência de compra..."></textarea>
+            <textarea value={text} onChange={handleChange} placeholder="Carro muito confortável, foi uma ótima experiência de compra..."></textarea>
             <div className="button-comment">
               <Button
                 type="button"
                 colorbutton="Brand"
                 width="20%"
-                //  onClick={() => handlePost()}
+                onClick={() => handlePost()}
               >
                 Comentar
               </Button>
