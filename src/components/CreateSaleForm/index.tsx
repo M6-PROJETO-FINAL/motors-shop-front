@@ -9,15 +9,24 @@ import { toast } from "react-toastify";
 import { UpdateApiContext } from "../../context/UpdateApi";
 import { IVehicleRegister } from "../../interfaces/vehicle.interfaces";
 
-function CreateSaleForm({ setShowCreateProductModal }: any) {
+function CreateSaleForm({ setShowCreateProductModal, saleType }: any) {
   const [vehicleType, setVehicleType] = useState("car");
   const [vehicleInfo, setVehicleInfo] = useState<IVehicleRegister>();
   const { setUpdateApi, updateApi } = useContext(UpdateApiContext);
+  const [numFotos, setNumFotos] = useState(
+    vehicleInfo?.vehicleImages?.length || 1
+  );
+
+  function adicionarFoto() {
+    if (numFotos < 6) {
+      setNumFotos(numFotos + 1);
+    }
+  }
 
   const userToken = localStorage.getItem("@motorsShop:token");
 
   const formSchema = yup.object().shape({
-    name: yup.string(),
+    title: yup.string(),
     description: yup.string().required("Campo obrigatório"),
     km: yup
       .string()
@@ -30,7 +39,7 @@ function CreateSaleForm({ setShowCreateProductModal }: any) {
       .string()
       .required("Campo obrigatório")
       .matches(/^(?=.*[0-9])(?=.{4,})/, "Insira apenas 4 números"),
-    coverImage: yup.string().required("Campo obrigatório"),
+    image_cover: yup.string().required("Campo obrigatório"),
     price: yup.string().required("Campo obrigatório"),
     photo1: yup.string().required("Campo obrigatório"),
     photo2: yup.string(),
@@ -49,15 +58,13 @@ function CreateSaleForm({ setShowCreateProductModal }: any) {
   });
 
   const onSubmit = (data: IVehicleRegister) => {
-    console.log(data);
-    console.log("cheguei aqui");
     const {
-      coverImage,
-      description,
-      km,
-      name,
-      price,
+      title,
       year,
+      km,
+      price,
+      description,
+      image_cover,
       photo1,
       photo2,
       photo3,
@@ -66,48 +73,51 @@ function CreateSaleForm({ setShowCreateProductModal }: any) {
       photo6,
     } = data;
 
-    const vehiclePhotos = [photo1];
+    const vehicleImages = [photo1];
     if (photo2) {
-      vehiclePhotos.push(photo2);
+      vehicleImages.push(photo2);
     }
     if (photo3) {
-      vehiclePhotos.push(photo3);
+      vehicleImages.push(photo3);
     }
     if (photo4) {
-      vehiclePhotos.push(photo4);
+      vehicleImages.push(photo4);
     }
     if (photo5) {
-      vehiclePhotos.push(photo5);
+      vehicleImages.push(photo5);
     }
     if (photo6) {
-      vehiclePhotos.push(photo6);
+      vehicleImages.push(photo6);
     }
 
     const vehicleData = {
-      name,
-      description,
-      km,
+      type: saleType,
+      title,
       year,
-      coverImage,
+      km,
       price,
-      type: vehicleType,
-      vehiclePhotos,
+      description,
+      type_veihcle: vehicleType,
+      image_cover,
+      first_image: photo1,
+      vehicleImages,
     };
 
-    console.log(data);
+    console.log(vehicleData);
+    console.log(userToken);
 
     api
-      .post(`vehicles/`, vehicleData, {
+      .post(`vehicles`, vehicleData, {
         headers: { Authorization: `Bearer ${userToken}` },
       })
       .then((res) => {
         toast.success("Anúncio criado com sucesso!");
         setTimeout(() => {
-          setUpdateApi(!updateApi);
           setShowCreateProductModal(false);
+          setUpdateApi(!updateApi);
         }, 2000);
       })
-      .catch((err) => console.log("Tente novamente mais tarde."));
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -118,9 +128,9 @@ function CreateSaleForm({ setShowCreateProductModal }: any) {
         label="Título"
         placeholder="Digitar título"
         register={register}
-        name="name"
-        error={errors?.name?.message}
-        defaultValue={vehicleInfo?.name}
+        name="title"
+        error={errors?.title?.message}
+        defaultValue={vehicleInfo?.title}
       />
       <div className="flex-row">
         <InputBase
@@ -197,9 +207,9 @@ function CreateSaleForm({ setShowCreateProductModal }: any) {
         label="Imagem da capa"
         placeholder="http://image.com"
         register={register}
-        name="coverImage"
-        error={errors?.coverImage?.message}
-        defaultValue={vehicleInfo?.coverImage}
+        name="image_cover"
+        error={errors?.image_cover?.message}
+        defaultValue={vehicleInfo?.image_cover}
       />
 
       {vehicleInfo?.vehicleImages?.map((elem, index) => (
@@ -215,6 +225,32 @@ function CreateSaleForm({ setShowCreateProductModal }: any) {
           defaultValue={elem.url}
         />
       ))}
+
+      {[...Array(numFotos - (vehicleInfo?.vehicleImages?.length || 0))].map(
+        (_, index) => (
+          <InputBase
+            key={(vehicleInfo?.vehicleImages?.length || 0) + index}
+            width="100%"
+            type="text"
+            label={
+              (vehicleInfo?.vehicleImages?.length || 0) +
+              index +
+              1 +
+              "ª Foto da galeria"
+            }
+            placeholder="http://image.com"
+            register={register}
+            name={`photo${
+              (vehicleInfo?.vehicleImages?.length || 0) + index + 1
+            }`}
+          />
+        )
+      )}
+
+      {/* Botão para adicionar nova foto */}
+      <button type="button" onClick={adicionarFoto} className="btn-add-photos">
+        Adicionar foto (máx: 6)
+      </button>
 
       <div className="final-buttons">
         <button

@@ -167,4 +167,26 @@ export const Form = styled.form`
       }
     }
   }
+
+  .btn-add-photos {
+    background-color: var(--grey-06);
+
+    color: var(--grey2);
+    font-size: 16px;
+    font-weight: 600;
+
+    border: none;
+    border-radius: 4px;
+
+    width: 100%;
+    height: 48px;
+
+    font-family: "Inter";
+
+    &:hover {
+      background-color: var(--grey-03);
+      color: var(--whiteFixed);
+      border: none;
+    }
+  }
 `;

@@ -19,13 +19,16 @@ export interface IVehicleComment {
 }
 
 export interface IVehicleRegister {
-  name: string;
-  description: string;
-  km: number;
+  type: "sale" | "auction";
+  title: string;
   year: number;
-  coverImage: string;
+  km: number;
   price: number;
-  type: string;
+  description: string;
+  coverImage: string;
+  type_veihcle: "sale" | "motor";
+  image_cover: string;
+  first_image: string;
   vehicleImages?: { id: string; url: string }[];
   photo1: string;
   photo2?: string;

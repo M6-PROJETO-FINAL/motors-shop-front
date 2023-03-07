@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 import { loginSchema } from "../../../validators/loginUser";
+import { Link } from "react-router-dom";
 
 export const FormLoginUser = () => {
   const { loginUser } = useContext(AuthContext);
@@ -49,9 +50,11 @@ export const FormLoginUser = () => {
 
           <p>Ainda não possui conta?</p>
 
-          <ButtonBase type="button" colorbutton="Outline2" width="85%">
-            Cadastrar
-          </ButtonBase>
+          <Link to="/register">
+            <ButtonBase type="button" colorbutton="Outline2" width="85%">
+              Cadastrar
+            </ButtonBase>
+          </Link>
         </div>
       </StyledForm>
     </>
