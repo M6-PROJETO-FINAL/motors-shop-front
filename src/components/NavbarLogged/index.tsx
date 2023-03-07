@@ -15,19 +15,19 @@ import {
   EditPerfilHeaderModalStyled,
   ButtonsEditHeader,
 } from "./style";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 const NavbarLogged = () => {
+  const { logoutUser } = useContext(AuthContext);
   const [visible, setVisible] = useState(false);
   return (
     <NavStyled>
       <NavContent>
         <Logotipo className="logo">
           <Link to="/home">
-            <a href="#">
-              <img src={logo} alt="" />
-            </a>
+            <img src={logo} alt="" />
           </Link>
         </Logotipo>
 
@@ -72,7 +72,7 @@ const NavbarLogged = () => {
             <button>Editar Perfil</button>
             <button>Editar Endereço</button>
             <button>Minhas Compras</button>
-            <button>Sair</button>
+            <button onClick={logoutUser}>Sair</button>
           </ButtonsEditHeader>
 
           <ButtonRegisterStyled>Nome do Usuário</ButtonRegisterStyled>

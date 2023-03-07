@@ -3,6 +3,7 @@ import { FieldValues } from "react-hook-form";
 export interface IUserFullData {
   birthDate: string;
   cellPhone: string;
+  birthdate: string;
   city: string;
   complement?: string;
   cpf: string;

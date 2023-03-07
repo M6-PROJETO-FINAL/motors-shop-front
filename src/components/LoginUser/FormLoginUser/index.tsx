@@ -5,20 +5,20 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../../../context/AuthContext";
-import schema from "../../../validators/registerUser";
+import { loginSchema } from "../../../validators/loginUser";
 
 export const FormLoginUser = () => {
-  const { onSubmitFunction } = useContext(AuthContext);
+  const { loginUser } = useContext(AuthContext);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
+  } = useForm({ resolver: yupResolver(loginSchema) });
 
   return (
     <>
-      <StyledForm onSubmit={handleSubmit(onSubmitFunction)}>
+      <StyledForm onSubmit={handleSubmit(loginUser)}>
         <InputBase
           width="50%"
           type="text"
@@ -49,7 +49,7 @@ export const FormLoginUser = () => {
 
           <p>Ainda não possui conta?</p>
 
-          <ButtonBase type="submit" colorbutton="Outline2" width="85%">
+          <ButtonBase type="button" colorbutton="Outline2" width="85%">
             Cadastrar
           </ButtonBase>
         </div>
