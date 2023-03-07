@@ -40,7 +40,6 @@ export const FormCreatedUser = () => {
       isSeller: userType,
       password: data.password,
     };
-    console.log(newUser);
 
     await api
       .post("/user", newUser)
