@@ -7,8 +7,6 @@ import api from "../../services/api";
 import { useLocation } from "react-router";
 
 const ProductPage = () => {
-
-  debugger
   const userId = localStorage.getItem("@motorsShop:userId");
   const token = localStorage.getItem("@motorsShop:token");
   const location = useLocation();

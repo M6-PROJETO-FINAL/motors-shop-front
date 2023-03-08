@@ -1,5 +1,5 @@
 import { userInitials } from "../../utils/userInitials";
-import { useContext, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { CheckCommentContext } from "../../context/CheckComment";
 import api from "../../services/api";
@@ -11,14 +11,14 @@ import { UpdateApiContext } from "../../context/UpdateApi";
 
 interface CommentProps {
   userName: string;
-  commentDate: string;
-  text: string;
-  commentId: string;
+  advertisementId: string;
+  setIsPost:Dispatch<SetStateAction<boolean>>;
 }
 
 function PostCommentCard({
   userName,
-  commentId,
+  advertisementId,
+  setIsPost
 }: CommentProps) {
   const [showModal, setShowModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -27,19 +27,18 @@ function PostCommentCard({
 
   const { isComment, setIsComment } = useContext(CheckCommentContext);
 
-  const userId = localStorage.getItem("@motorsShop:userId");
   const token = localStorage.getItem("@motorsShop:token");
-
   const handlePost = () =>{
     const commentData = {
-      text:text
-//       advertisementID:advertisementID
+      text:text,
+      advertisementID:advertisementId
     };
     api
     .post(`/comments`, commentData, {
       headers: { Authorization: `Bearer ${token}` },
     })
     .then((res) => {
+      setIsPost(true)
       toast.success("Anúncio criado com sucesso!");
       setTimeout(() => {
         setUpdateApi(!updateApi);
@@ -49,32 +48,12 @@ function PostCommentCard({
   };
 
   
-
   const handleChange = (event:any) =>{
     setText(event.target.value)
   }
 
-  // useEffect(() => {
-  //   if (userId !== null) {
-  //     api
-  //       .get(`comments/${commentId}`)
-  //       .then((res) => {
-  //         setComment(res.data);
-  //       })
-  //       .catch((err) => console.log("Tente novamente mais tarde."));
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
-
   return (
     <PostCommentDiv>
-      {showModal && (
-        <EditCommentModal
-          setShowModal={setShowModal}
-          setShowSuccessModal={setShowSuccessModal}
-          commentId={commentId}
-        />
-      )}
       {showSuccessModal && (
         <SuccessModal
           header="Sucesso!"

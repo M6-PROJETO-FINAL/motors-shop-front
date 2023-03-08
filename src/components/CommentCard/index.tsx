@@ -11,13 +11,11 @@ import { CommentDiv } from "./styles";
 import { BsFillCircleFill } from "react-icons/bs";
 
 interface CommentProps {
-  userName: string;
-  commentDate: string;
-  text: string;
-  commentId: string;
+  comments:any[]
+  setIsPost:React.Dispatch<React.SetStateAction<boolean>> 
 }
 
-function CommentCard({ userName, commentDate, text, commentId }: CommentProps) {
+function CommentCard({ comments,setIsPost }: CommentProps) {
   const [showModal, setShowModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [comment, setComment] = useState({} as any);
@@ -26,6 +24,11 @@ function CommentCard({ userName, commentDate, text, commentId }: CommentProps) {
 
   const userId = localStorage.getItem("@motorsShop:userId");
   const token = localStorage.getItem("@motorsShop:token");
+
+  const handleSubmit = (comment:any) => {
+    setComment(comment)
+    setShowModal(true)
+  }
 
   useEffect(() => {
     if (userId !== null) {
@@ -46,6 +49,7 @@ function CommentCard({ userName, commentDate, text, commentId }: CommentProps) {
       })
       .then((res) => {
         toast.success("Comentario deletado com Sucesso");
+        setIsPost(true)
         setIsComment(!isComment);
       })
       .catch((err) => toast.error("Comentario não foi deletado"));
@@ -57,7 +61,8 @@ function CommentCard({ userName, commentDate, text, commentId }: CommentProps) {
         <EditCommentModal
           setShowModal={setShowModal}
           setShowSuccessModal={setShowSuccessModal}
-          commentId={commentId}
+          comment={comment}
+          setIsPost={setIsPost}
         />
       )}
       {showSuccessModal && (
@@ -69,36 +74,40 @@ function CommentCard({ userName, commentDate, text, commentId }: CommentProps) {
         />
       )}
       <h2>Comentários</h2>
-
-      <div className="userInfo">
-        <div className="sellerPhoto">
-          <p>{userInitials(userName)}</p>
+      { comments.map((comment,index) => (
+        <div key={index}>
+            <div  key={index} className="userInfo">
+              <div className="sellerPhoto">
+                <p>{userInitials(comment.user.fullName)}</p>
+              </div>
+              <p className="userName">{comment.user.fullName}</p>
+              <div className="time">
+                <BsFillCircleFill size={5} />
+                <span key={index} className="date">{calculateTimePassed(comment.user.created_at)}</span>
+              </div>
+            </div>
+            <div className="text">{comment.text}</div>
+            <div className="buttons">
+              <button className="editButton" onClick={() => handleSubmit(comment)}>
+                <AiFillEdit size={20} />
+              </button>
+              <button
+                className="deleteButton"
+                onClick={() => deleteComment(comment.id)}
+              >
+                <AiFillDelete color="#4529E6" size={20} />
+              </button>
+            </div>
         </div>
-        <p className="userName">{userName}</p>
-        <div className="time">
-          <BsFillCircleFill size={5} />
-          <span className="date">{calculateTimePassed(commentDate)}</span>
-        </div>
-      </div>
+      )
+      
+      
+      )
+      }
 
-      <div className="text">{text}</div>
-      {comment.user?.id === userId && (
-        <>
-          <div className="buttons">
-            <button className="editButton" onClick={() => setShowModal(true)}>
-              <AiFillEdit size={20} />
-            </button>
-            <button
-              className="deleteButton"
-              onClick={() => deleteComment(comment.id)}
-            >
-              <AiFillDelete size={20} />
-            </button>
-          </div>
-        </>
-      )}
     </CommentDiv>
   );
 }
 
 export default CommentCard;
+

@@ -16,13 +16,15 @@ import PostCommentCard from "../PostCommentCard";
 import { useEffect, useState } from "react";
 import CreatePhotoModal from "../CreatePhotoModal";
 import api from "../../services/api";
+import jwt_decode from "jwt-decode"
 
 function ProductDetails({ product, sellerId }: any) {
   const navigate = useNavigate();
   const [advs,setAdvs] = useState([])
+  const [payloadJwt,setPayloadJwt] = useState({} as any) 
+  const [isPost,setIsPost] = useState(false)
 
-  const [showPhotoProductModal, setShowPhotoProductModal] = useState(false);
-
+  const [showPhotoProductModal, setShowPhotoProductModal] = useState(true);
   const handleClickSeller = () => {
     navigate(`/profile/${sellerId}`);
   };
@@ -32,10 +34,16 @@ function ProductDetails({ product, sellerId }: any) {
       .get(`comments/${product.id}`)
       .then((res) => {
         setAdvs(res.data)
+        setIsPost(false)
+        const token = localStorage.getItem("@motorsShop:token");
+        if(token){
+          const data = jwt_decode(token)
+          setPayloadJwt(data)
+        }
       })
       .catch((err) => console.log("Tente novamente mais tarde."));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isPost]);
 
   return (
     <ProfileHeader>
@@ -82,25 +90,18 @@ function ProductDetails({ product, sellerId }: any) {
             <h2>Descrição</h2>
             <p>{product.description}</p>
           </DescriptionContent>
-        {advs.length > 0 && 
-          advs.map((element:any) => (
-            <CommentCard
-                userName={element?.user.fullName}
-                commentDate={element?.createdAt}
-                text={element?.text}
-                commentId={element?.id}
-            />
-          )
-          )
-        }
+          {advs.length > 0 && 
+              <CommentCard
+                  comments={advs}
+                  setIsPost={setIsPost}
+              />
+          }
      
-        {/* 
-          <PostCommentCard
-            userName={product.user.fullName}
-            commentDate={product.user.comments[0].date}
-            text={product.user.comments[0].text}
-            commentId={product.user.comments[0].id}
-          /> */}
+         <PostCommentCard
+            userName={payloadJwt?.name || ""}
+            advertisementId={product.id}
+            setIsPost={setIsPost}
+          />
         </div>
 
         <div className="profile-content">
