@@ -13,7 +13,6 @@ export const AuctionContext = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: red;
 `;
 
 export const CardAuctionContainer = styled.div`

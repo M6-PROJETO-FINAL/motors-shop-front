@@ -6,8 +6,6 @@ import CardAuction from "../../components/CardAuction";
 import { DivContainer } from "./style";
 import { CaroselTitle } from "./style";
 import { productAuction } from "../../utils/auctionProducts";
-import { useContext } from "react";
-import { ProductContent } from "../../components/ProductDetails/style";
 
 const products = [
   {

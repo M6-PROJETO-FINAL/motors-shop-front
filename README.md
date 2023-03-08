@@ -1,6 +1,9 @@
-# Motors Shop 🚗
+# Motors Shop [Front-end] 🚗
 
 > Repositório front-end do projeto Motors Shop, desenvolvido em ReactJS para conclusão do módulo 6 da formação em desenvolvimento Fullstack da Kenzie Academy Brasil. 
+ 
+&nbsp;
+### A Motors Shop é um projeto E-Commerce; um site de leilões e anúncios de veículos para compra e venda. 
  
  &nbsp;
 ## 💅 Front-End
