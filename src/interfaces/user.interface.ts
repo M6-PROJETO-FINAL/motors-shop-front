@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { FieldValues } from "react-hook-form";
 
 export interface IUserFullData {
@@ -30,6 +31,7 @@ export interface IUserAddressRequest {
 }
 
 export interface IUserRequest {
+  id: string;
   fullName: string;
   email: string;
   cpf: string;
@@ -39,6 +41,15 @@ export interface IUserRequest {
   isSeller: boolean;
   password: string;
   address: IUserAddressRequest;
+}
+
+export interface ILogin {
+  email: string;
+  password: string;
+}
+
+export interface IResponseSession {
+  token: string;
 }
 
 export interface IUserEditContext {
@@ -53,4 +64,15 @@ export interface IEditProfile {
   id: string;
   data: FieldValues;
   address: boolean;
+}
+
+export interface LoginContextProps {
+  loginUser: (data: FieldValues) => void;
+  logoutUser: () => void;
+  user: IUserRequest;
+  loading: boolean;
+}
+
+export interface ILoginProviderProps {
+  children: ReactNode;
 }

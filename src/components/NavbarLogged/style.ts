@@ -51,6 +51,7 @@ export const MenuIconStyled = styled.div.attrs((props: PropTypeBg) => ({
     align-items: center;
     position: static;
     cursor: pointer;
+
   }
 `;
 
@@ -101,7 +102,7 @@ export const MenuLinks = styled.ul<PropTypeBg>`
     top: 20px;
     right: 40px;
     overflow: hidden;
-    height: 430px;
+    height: 400px;
     width: 300px;
     padding: 15px;
     border-radius: 5px;
@@ -180,6 +181,7 @@ export const DivLineHeaderStyled = styled.div`
   width: 1px;
   height: 85px;
   border: 1px solid var(--grey-07);
+  
   @media ${device.laptop} {
     width: 270px;
     align-items: center;
@@ -191,6 +193,7 @@ export const DivLineHeaderStyled = styled.div`
 export const EditPerfilHeaderModalStyled = styled.div`
   display: none;
   overflow: hidden;
+
 
   @media ${device.laptop} {
     display: block;
@@ -229,6 +232,7 @@ export const EditPerfilHeaderModalStyled = styled.div`
       outline: none;
       flex-flow: nowrap;
       gap: 1rem;
+      margin-bottom: 1.2rem;
 
       &:hover {
         color: var(--brand-01);
@@ -237,7 +241,7 @@ export const EditPerfilHeaderModalStyled = styled.div`
   }
 `;
 
-export const ButtonsEditHeader = styled.div<PropTypeBg>`
+export const ButtonsEditHeaderMobile = styled.div<PropTypeBg>`
   display: ${({ visible }: PropTypeBg) => (visible ? "block" : "none")};
   flex-flow: column nowrap;
   backdrop-filter: blur(3px);
@@ -268,6 +272,7 @@ export const ButtonsEditHeader = styled.div<PropTypeBg>`
   }
 
   button {
+    
     font-family: "Inter";
     font-size: 1rem;
     background-color: transparent;

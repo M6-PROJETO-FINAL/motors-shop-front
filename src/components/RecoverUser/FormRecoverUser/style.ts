@@ -14,6 +14,7 @@ export const StyledForm = styled.form`
   .subTitle {
     width: 85%;
     display: flex;
+    text-align: center;
   }
 
   .password {
@@ -204,14 +205,6 @@ export const StyledForm = styled.form`
       font-size: 0.875rem;
       color: var(--alert-1);
       font-style: italic;
-    }
-  }
-
-  .button--box > a {
-    width: 85%;
-
-    button {
-      width: 100%;
     }
   }
 `;

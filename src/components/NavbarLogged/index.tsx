@@ -2,6 +2,7 @@ import logo from "../../assets/img/motors-shop.svg";
 import { HiMenu } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
 import { FiSettings } from "react-icons/fi";
+import { userInitials } from "../../utils/userInitials";
 
 import {
   NavStyled,
@@ -13,17 +14,38 @@ import {
   ButtonRegisterStyled,
   DivLineHeaderStyled,
   EditPerfilHeaderModalStyled,
-  ButtonsEditHeader,
+  ButtonsEditHeaderMobile,
 } from "./style";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import EditUserModal from "../EditUserModal";
+import EditAddressModal from "../EditAdressModal";
 
 const NavbarLogged = () => {
-  const { logoutUser } = useContext(AuthContext);
+  const { logoutUser, user } = useContext(AuthContext);
   const [visible, setVisible] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+
+  const [showAddressModal, setShowAddressModal] = useState(false);
+  const [showAddressSuccessModal, setShowAddressSuccessModal] = useState(false);
+
   return (
     <NavStyled>
+      {showModal && (
+        <EditUserModal
+          setShowModal={setShowModal}
+          setShowSuccessModal={setShowSuccessModal}
+        />
+      )}
+      {showAddressModal && (
+        <EditAddressModal
+          setShowAddressModal={setShowAddressModal}
+          setShowAddressSuccessModal={setShowAddressSuccessModal}
+        />
+      )}
+
       <NavContent>
         <Logotipo className="logo">
           <Link to="/home">
@@ -55,27 +77,66 @@ const NavbarLogged = () => {
               <h4>Configurações</h4>
             </div>
 
-            <div className="buttonsEditHeader">
-              <button>Editar Perfil</button>
-              <button>Editar Endereço</button>
-              <button>Minhas Compras</button>
-              <button>Sair</button>
-            </div>
+            {user.isSeller ? (
+              <>
+                <button onClick={() => setShowModal(true)}>
+                  Editar Perfil
+                </button>
+                <button onClick={() => setShowAddressModal(true)}>
+                  Editar Endereço
+                </button>
+                <button>
+                  <a href="#cars">Meus Anúncios</a>
+                </button>
+                <button onClick={() => logoutUser()}>Sair</button>
+              </>
+            ) : (
+              <>
+                <button onClick={() => setShowModal(true)}>
+                  Editar Perfil
+                </button>
+                <button onClick={() => setShowAddressModal(true)}>
+                  Editar Endereço
+                </button>
+                <button onClick={() => logoutUser()}>Sair</button>
+              </>
+            )}
           </EditPerfilHeaderModalStyled>
 
           <ButtonLoginStyled onClick={() => setVisible(!visible)}>
-            NU
+            {userInitials(user.fullName)}
           </ButtonLoginStyled>
 
-          <ButtonsEditHeader visible={visible}>
-            <IoClose size={28} onClick={() => setVisible(false)} />
-            <button>Editar Perfil</button>
-            <button>Editar Endereço</button>
-            <button>Minhas Compras</button>
-            <button onClick={logoutUser}>Sair</button>
-          </ButtonsEditHeader>
+          <ButtonRegisterStyled>{user.fullName}</ButtonRegisterStyled>
 
-          <ButtonRegisterStyled>Nome do Usuário</ButtonRegisterStyled>
+          <ButtonsEditHeaderMobile visible={visible}>
+            <IoClose size={28} onClick={() => setVisible(false)} />
+
+            {user.isSeller ? (
+              <>
+                <button onClick={() => setShowModal(true)}>
+                  Editar Perfil
+                </button>
+                <button onClick={() => setShowAddressModal(true)}>
+                  Editar Endereço
+                </button>
+                <button>
+                  <a href="#cars">Meus Anúncios</a>
+                </button>
+                <button onClick={() => logoutUser()}>Sair</button>
+              </>
+            ) : (
+              <>
+                <button onClick={() => setShowModal(true)}>
+                  Editar Perfil
+                </button>
+                <button onClick={() => setShowAddressModal(true)}>
+                  Editar Endereço
+                </button>
+                <button onClick={() => logoutUser()}>Sair</button>
+              </>
+            )}
+          </ButtonsEditHeaderMobile>
         </MenuLinks>
       </NavContent>
     </NavStyled>

@@ -49,7 +49,7 @@ export const ProfileContent = styled.div`
   flex-direction: column;
   border-radius: 4px;
   background-color: var(--white);
-  margin-bottom: 89px;
+  margin-bottom: 40px;
   padding: 2rem;
 `;
 

@@ -4,28 +4,30 @@ import { StyledForm } from "./style";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-import { IModal } from "../../../interfaces/showModal.interfaces";
-import { useContext, useEffect, useState } from "react";
-import { EditProfileContext } from "../../../context/EditProfileContext";
+import { IModalAddress } from "../../../interfaces/showModal.interfaces";
+import { useEffect, useState } from "react";
 import { IUserAddressRequest } from "../../../interfaces/user.interface";
 import api from "../../../services/api";
 import { checkInfos } from "../../../utils/checkInfos";
 
-export const FormEditAddress: React.FC<IModal> = ({
-  setShowModal,
-  setShowSuccessModal,
+export const FormEditAddress: React.FC<IModalAddress> = ({
+  setShowAddressModal,
+  setShowAddressSuccessModal,
 }) => {
-  const [state, setState] = useState(false);
+  const id = localStorage.getItem("@motorsShop:id");
 
-  const { editProfile } = useContext(EditProfileContext);
-
-  const id = localStorage.getItem("@motorsShop:userId");
   const [userAddress, setUserAddress] = useState({} as IUserAddressRequest);
+  const [isDone, setIsDone] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [message, setMessage] = useState("");
+  const [state, setState] = useState(false);
 
   useEffect(() => {
     api
-      .get(`users/${id}`)
-      .then((res) => setUserAddress(res.data.address))
+      .get(`/user/${id}`)
+      .then((res) => {
+        setUserAddress(res.data.address);
+      })
       .catch((err) => console.log("Tente novamente mais tarde."));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -54,12 +56,37 @@ export const FormEditAddress: React.FC<IModal> = ({
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema), reValidateMode: "onSubmit" });
 
-  const onSubmit = (data: object) => {
-    const fixedData = checkInfos(data, userAddress);
-    editProfile(id!, fixedData, true);
+  const token = localStorage.getItem("@motorsShop:token");
 
-    setShowModal(false);
-    setShowSuccessModal(true);
+  const reloadPage = async () => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    window.location.reload();
+  };
+
+  const editAddress = async (id: string, data: {}, address: boolean) => {
+    if (address) {
+      api
+        .patch(`/user/address/${id}`, data, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((res) => {
+          console.log(res, data)
+          setIsDone(true);
+          setShowAddressModal(false);
+          reloadPage();
+        })
+        .catch((err) => {
+          setIsError(true);
+          setMessage(err.response.data.message);
+        });
+    }
+  };
+
+  const onSubmitAddress = (data: object) => {
+    const fixedData = checkInfos(data, userAddress);
+    editAddress(id!, fixedData, true);
+    setShowAddressModal(false);
+    setShowAddressSuccessModal(true);
   };
 
   useEffect(() => {
@@ -83,7 +110,7 @@ export const FormEditAddress: React.FC<IModal> = ({
         onClick={() => {
           setState(true);
         }}
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(onSubmitAddress)}
       >
         <div className="subTitle">
           <h2>Infomações de endereço</h2>
@@ -160,7 +187,7 @@ export const FormEditAddress: React.FC<IModal> = ({
             type="button"
             colorbutton="Negative"
             width="40%"
-            onClick={() => setShowModal(false)}
+            onClick={() => setShowAddressModal(false)}
           >
             Cancelar
           </ButtonBase>

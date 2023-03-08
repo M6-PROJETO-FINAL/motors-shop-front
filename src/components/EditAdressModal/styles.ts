@@ -60,12 +60,13 @@ export const Container = styled.div`
     }
 
     svg {
+      width: 20px;
       font-size: 24px;
       color: var(--grey4);
       cursor: pointer;
 
       &:hover {
-        color: var(--grey3);
+        color: var(--grey-03);
       }
     }
   }
