@@ -1,6 +1,6 @@
 import { Footer } from "../../components/Footer";
 import NavbarLogged from "../../components/NavbarLogged";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   ProfileContent,
   ProfileHeader,
@@ -14,6 +14,11 @@ import {
 import CreateProductModal from "../../components/CreateProductModal";
 import { CaroselTitle } from "../Home/style";
 import CarouselAdmin from "../../components/CarouselAdmin";
+import { AuthContext } from "../../context/AuthContext";
+import { userInitials } from "../../utils/userInitials";
+import { productAuction } from "../../utils/auctionProducts";
+import { DivContainer } from "../Home/style";
+import CardAuction from "../../components/CardAuction";
 
 export const products = [
   {
@@ -250,6 +255,7 @@ export const products = [
 ];
 
 const ProfileViewAdmin = () => {
+  const { user } = useContext(AuthContext);
   const [showCreateProductModal, setShowCreateProductModal] = useState(false);
 
   return (
@@ -265,17 +271,13 @@ const ProfileViewAdmin = () => {
 
       <ProfileHeader>
         <ProfileContent>
-          <ButtonLoginStyled>SL</ButtonLoginStyled>
+          <ButtonLoginStyled>{userInitials(user.fullName)}</ButtonLoginStyled>
           <ContentTitleStyled>
-            <p>Nome do Usuário</p>
-            <small>Anunciante</small>
+            <p>{user.fullName}</p>
+            <small>{user.isSeller ? "Anunciante" : "Comprador"}</small>
           </ContentTitleStyled>
 
-          <DescriptionProfile>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s
-          </DescriptionProfile>
+          <DescriptionProfile>{user.description}</DescriptionProfile>
 
           <ButtonCreateAnnouncement
             onClick={() => setShowCreateProductModal(true)}
@@ -284,6 +286,14 @@ const ProfileViewAdmin = () => {
           </ButtonCreateAnnouncement>
         </ProfileContent>
       </ProfileHeader>
+
+      <CaroselTitle>Leilão</CaroselTitle>
+      <DivContainer>
+        <CardAuction product={productAuction} />
+        <CardAuction product={productAuction} />
+        <CardAuction product={productAuction} />
+      </DivContainer>
+
       <CaroselTitle id="cars">Carros</CaroselTitle>
       <CarouselAdmin props={"car"} id={products[0].user.id} />
       <CaroselTitle id="motorcycle">Motos</CaroselTitle>

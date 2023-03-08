@@ -5,6 +5,7 @@ import CarouselProducts from "../../components/CarouselProducts";
 import CardAuction from "../../components/CardAuction";
 import { DivContainer } from "./style";
 import { CaroselTitle } from "./style";
+import { productAuction } from "../../utils/auctionProducts";
 
 const products = [
   {
@@ -179,29 +180,15 @@ const products = [
 ];
 
 const HomePage = () => {
-  const product = {
-    time: "01:58:00",
-    image: "../../assets/.svg",
-    title: "Mercedes Benz A 200 CGI ADVANCE SEDAN Mercedes Benz A 200",
-    subtitle:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem...",
-    user: {
-      fullName: "Rodrigo Tavares",
-    },
-    year: "2013",
-    km: "0 KM",
-    price: "R$00.000,00",
-  };
-
   return (
     <main>
       <Navbar />
       <Header />
       <CaroselTitle>Leilão</CaroselTitle>
       <DivContainer>
-        <CardAuction product={product} />
-        <CardAuction product={product} />
-        <CardAuction product={product} />
+        <CardAuction product={productAuction} />
+        <CardAuction product={productAuction} />
+        <CardAuction product={productAuction} />
       </DivContainer>
       <CaroselTitle id="cars">Carros</CaroselTitle>
       <CarouselProducts props={"car"} arr={products} />

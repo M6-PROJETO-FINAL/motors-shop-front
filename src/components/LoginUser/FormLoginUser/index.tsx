@@ -6,15 +6,22 @@ import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 import { loginSchema } from "../../../validators/loginUser";
+import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 export const FormLoginUser = () => {
   const { loginUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(loginSchema) });
+
+  const forgotPassword = () => {
+    navigate("/recoveraccount", { replace: true });
+  };
 
   return (
     <>
@@ -39,7 +46,7 @@ export const FormLoginUser = () => {
             name="password"
             error={errors?.password?.message}
           ></InputBase>
-          <small> Esqueci minha senha</small>
+          <small onClick={forgotPassword}> Esqueci minha senha</small>
         </div>
 
         <div className="button--box">
@@ -50,7 +57,7 @@ export const FormLoginUser = () => {
           <p>Ainda não possui conta?</p>
 
           <ButtonBase type="button" colorbutton="Outline2" width="85%">
-            Cadastrar
+            <Link to="/register">Cadastrar</Link>
           </ButtonBase>
         </div>
       </StyledForm>

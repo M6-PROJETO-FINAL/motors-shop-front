@@ -1,39 +1,35 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../services/api";
 import { FieldValues } from "react-hook-form";
-
-interface LoginContextProps {
-  loginUser: (data: FieldValues) => void;
-  logoutUser: () => void;
-}
-
-interface ILoginProviderProps {
-  children: ReactNode;
-}
+import {
+  IUserRequest,
+  IResponseSession,
+  LoginContextProps,
+  ILoginProviderProps,
+} from "../interfaces/user.interface";
+import api from "../services/api";
 
 export const AuthContext = createContext<LoginContextProps>(
   {} as LoginContextProps
 );
 
 const AuthProvider = ({ children }: ILoginProviderProps) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<IUserRequest>({} as IUserRequest);
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
-  
 
   useEffect(() => {
     async function loadUser() {
-      const token = localStorage.getItem("@TOKEN:token");
+      const token = localStorage.getItem("@motorsShop:token");
       if (token) {
         try {
-          api.defaults.headers.authorization = `Bearer ${token}`;
+          api.defaults.headers.common.authorization = `Bearer ${token}`;
 
-          const { data } = await api.get("/profile");
-          setUser(data);
+          getProfile();
         } catch (error) {
           console.error(error);
+          localStorage.clear();
         }
       }
       setLoading(false);
@@ -42,18 +38,21 @@ const AuthProvider = ({ children }: ILoginProviderProps) => {
   }, []);
 
   const loginUser = async (data: FieldValues) => {
-    await api
-      .post("/login", data)
-      .then((response) => {
+    try {
+      await api.post<IResponseSession>("/login", data).then((response) => {
         const token = response.data.token;
-
         api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
+        getProfile();
+
         localStorage.clear();
-        localStorage.setItem("@TOKEN: token", token);
+        localStorage.setItem("@motorsShop:token", token);
+
         navigate("/profile", { replace: true });
-      })
-      .catch((error) => console.error(error));
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const logoutUser = async () => {
@@ -61,11 +60,21 @@ const AuthProvider = ({ children }: ILoginProviderProps) => {
     navigate("/login", { replace: true });
   };
 
+  const getProfile = async () => {
+    const { data } = await api.get<IUserRequest>("/user/profile");
+    setUser(data);
+
+    localStorage.setItem("@motorsShop:id", data.id);
+    localStorage.setItem("@motorsShop:name", data.fullName);
+  };
+
   return (
     <AuthContext.Provider
       value={{
         loginUser,
         logoutUser,
+        user,
+        loading,
       }}
     >
       {children}

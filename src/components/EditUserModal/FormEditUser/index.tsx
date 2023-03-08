@@ -5,25 +5,27 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { IModal } from "../../../interfaces/showModal.interfaces";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import api from "../../../services/api";
 import { IUserRequest } from "../../../interfaces/user.interface";
-import { EditProfileContext } from "../../../context/EditProfileContext";
 import { checkInfos } from "../../../utils/checkInfos";
 
 export const FormEditUser: React.FC<IModal> = ({
   setShowModal,
   setShowSuccessModal,
 }) => {
-  const { editProfile } = useContext(EditProfileContext);
-
-  const id = localStorage.getItem("@motorsShop:userId");
+  const id = localStorage.getItem("@motorsShop:id");
   const [user, setUser] = useState({} as IUserRequest);
+  const [isDone, setIsDone] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     api
-      .get(`users/${id}`)
-      .then((res) => setUser(res.data))
+      .get(`/profile`)
+      .then((res) => {
+        setUser(res.data);
+      })
       .catch((err) => console.log("Tente novamente mais tarde."));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -67,9 +69,32 @@ export const FormEditUser: React.FC<IModal> = ({
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema), reValidateMode: "onSubmit" });
 
+  const token = localStorage.getItem("@motorsShop:token");
+
+  const reloadPage = async () => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    window.location.reload();
+  };
+
+  const editProfileUser = async (id: string, data: {}, address: boolean) => {
+    await api
+      .patch(`/user/${id}`, data, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        setIsDone(true);
+        setShowModal(false);
+        reloadPage();
+      })
+      .catch((err) => {
+        setIsError(true);
+        setMessage(err.response.data.message);
+      });
+  };
+
   const onSubmit = (data: object) => {
     const fixedData = checkInfos(data, user);
-    editProfile(id!, fixedData, false);
+    editProfileUser(id!, fixedData, false);
     setShowModal(false);
     setShowSuccessModal(true);
   };

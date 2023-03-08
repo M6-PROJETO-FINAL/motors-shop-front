@@ -14,6 +14,7 @@ export const StyledForm = styled.form`
   .subTitle {
     width: 85%;
     display: flex;
+    text-align: center;
   }
 
   .password {

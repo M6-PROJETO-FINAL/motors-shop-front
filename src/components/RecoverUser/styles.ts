@@ -1,9 +1,11 @@
 import styled from "styled-components";
-import { device } from "../../Global/media";
 
 export const Container = styled.div`
-  margin-top: 95px;
-  margin-bottom: 95px;
+  margin-top: 45px;
+  margin-bottom: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   .content {
     display: flex;
@@ -11,16 +13,10 @@ export const Container = styled.div`
     align-items: center;
     padding: 0.5rem;
     border-radius: 8px;
-    width: 480px;
+    width: 411px;
     gap: 30px;
     margin: 1rem auto;
     background-color: var(--whiteFixed);
-
-    @media ${device.mobile} {
-      width: 70%;
-      flex-direction: column;
-      gap: 1rem;
-    }
   }
 
   h1 {
@@ -31,5 +27,6 @@ export const Container = styled.div`
     line-height: 20px;
     width: 85%;
     margin-top: 20px;
+    text-align: center;
   }
 `;

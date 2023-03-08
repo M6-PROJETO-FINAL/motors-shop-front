@@ -33,14 +33,18 @@ export const Container = styled.div`
     align-content: flex-start;
     gap: 58px;
     margin-top: 95px;
+
     .modal--withButton {
       height: 70%;
     }
+
     section {
       display: flex;
       flex-wrap: wrap;
       align-content: space-between;
       gap: 18px;
+      text-align: center;
+      
       h2 {
         font-family: "Lexend";
         font-style: normal;
@@ -116,6 +120,7 @@ export const Container = styled.div`
     }
 
     svg {
+      width: 20px;
       font-size: 24px;
       color: var(--grey4);
       cursor: pointer;
