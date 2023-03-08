@@ -13,17 +13,29 @@ import {
 } from "./style";
 import CommentCard from "../CommentCard";
 import PostCommentCard from "../PostCommentCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CreatePhotoModal from "../CreatePhotoModal";
+import api from "../../services/api";
 
 function ProductDetails({ product, sellerId }: any) {
   const navigate = useNavigate();
+  const [advs,setAdvs] = useState([])
 
   const [showPhotoProductModal, setShowPhotoProductModal] = useState(false);
 
   const handleClickSeller = () => {
     navigate(`/profile/${sellerId}`);
   };
+
+  useEffect(() => {
+    api
+      .get(`comments/${product.id}`)
+      .then((res) => {
+        setAdvs(res.data)
+      })
+      .catch((err) => console.log("Tente novamente mais tarde."));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <ProfileHeader>
@@ -34,11 +46,11 @@ function ProductDetails({ product, sellerId }: any) {
       <div className="profile-context">
         <div className="profile-content">
           <ImageContent>
-            <img src={product.coverImage} alt={product.name} />
+            <img src={product.image_cover} alt={product.title} />
           </ImageContent>
 
           <ProductContent>
-            <h2>{product.name}</h2>
+            <h2>{product.title}</h2>
 
             <div className="product-details">
               <div className="span-btns">
@@ -70,20 +82,25 @@ function ProductDetails({ product, sellerId }: any) {
             <h2>Descrição</h2>
             <p>{product.description}</p>
           </DescriptionContent>
-
-          <CommentCard
-            userName={product.user.fullName}
-            commentDate={product.user.comments[0].date}
-            text={product.user.comments[0].text}
-            commentId={product.user.comments[0].id}
-          />
-
+        {advs.length > 0 && 
+          advs.map((element:any) => (
+            <CommentCard
+                userName={element?.user.fullName}
+                commentDate={element?.createdAt}
+                text={element?.text}
+                commentId={element?.id}
+            />
+          )
+          )
+        }
+     
+        {/* 
           <PostCommentCard
             userName={product.user.fullName}
             commentDate={product.user.comments[0].date}
             text={product.user.comments[0].text}
             commentId={product.user.comments[0].id}
-          />
+          /> */}
         </div>
 
         <div className="profile-content">
@@ -117,9 +134,10 @@ function ProductDetails({ product, sellerId }: any) {
           </BoxImages>
 
           <PerfilContent>
-            <IconStyled>{userInitials(product.user.fullName)}</IconStyled>
-            <h2>{product.user.fullName}</h2>
-            <p>{product.user.description}</p>
+            {/* <IconStyled>{userInitials(product.user.fullName)}</IconStyled> */}
+            <IconStyled>{userInitials("Higor")}</IconStyled>
+            <h2>{"Higor"}</h2>
+            <p>{"Show"}</p>
 
             <Button
               type="button"
@@ -137,3 +155,4 @@ function ProductDetails({ product, sellerId }: any) {
 }
 
 export default ProductDetails;
+

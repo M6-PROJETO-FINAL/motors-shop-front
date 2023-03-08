@@ -33,6 +33,7 @@ function PostCommentCard({
   const handlePost = () =>{
     const commentData = {
       text:text
+//       advertisementID:advertisementID
     };
     api
     .post(`/comments`, commentData, {
