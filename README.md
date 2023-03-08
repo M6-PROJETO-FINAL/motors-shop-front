@@ -2,6 +2,9 @@
 
 > Repositório front-end do projeto Motors Shop, desenvolvido em ReactJS para conclusão do módulo 6 da formação em desenvolvimento Fullstack da Kenzie Academy Brasil. 
  
+&nbsp;
+### A Motors Shop é um projeto E-Commerce; um site de leilões e anúncios de veículos para compra e venda. 
+ 
  &nbsp;
 ## 💅 Front-End
 [Clique aqui](https://www.figma.com/file/gEUjTK4ozBPNbJnqI8qZPH/M6---E-Commerce?node-id=45%3A2&t=s8rbTzHi9olwUxvd-0) para acessar o Figma da aplicação.
