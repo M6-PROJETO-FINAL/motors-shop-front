@@ -8,6 +8,7 @@ import {
   ILoginProviderProps,
 } from "../interfaces/user.interface";
 import api from "../services/api";
+import { toast } from "react-toastify";
 
 export const AuthContext = createContext<LoginContextProps>(
   {} as LoginContextProps
@@ -47,12 +48,13 @@ const AuthProvider = ({ children }: ILoginProviderProps) => {
 
         localStorage.clear();
         localStorage.setItem("@motorsShop:token", token);
-
+        toast.success("Login efetuado com sucesso!");
         navigate("/profile", { replace: true });
+      })
+      .catch((error) => {
+        toast.error("Ocorreu algum problema");
+        console.error(error);
       });
-    } catch (error) {
-      console.error(error);
-    }
   };
 
   const logoutUser = async () => {

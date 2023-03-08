@@ -1,10 +1,6 @@
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { IVehicleUpdate } from "../interfaces/vehicle.interfaces";
 
 import api from "../services/api";
 
@@ -12,18 +8,20 @@ interface ProviderProps {
   children: ReactNode;
 }
 
-interface IVehicle {
+export interface IVehicle {
   id: string;
-  name: string;
-  description: string;
+  type: "sale" | "auction";
+  title: string;
+  year: string;
   km: string;
-  year: number;
-  coverImage: string;
   price: string;
-  createdAt: string;
-  updatedAt: string;
-  type: string;
-  vehicleImages: { id: string; url: string }[];
+  description: string;
+  type_veihcle: "car" | "motorcycle";
+  image_cover: string;
+  first_image: string;
+  created_at: string;
+  update_at: string;
+  vehicleImages?: { id: string; url: string }[];
 }
 
 export interface IUser {
@@ -44,18 +42,7 @@ export interface IUser {
   fullName: string;
   id: string;
   isSeller: boolean;
-  vehicle?: {
-    coverImage: string;
-    createdAt: string;
-    description: string;
-    id: string;
-    km: string;
-    name: string;
-    price: string;
-    type: string;
-    updatedAt: string;
-    vehicleImages: { id: string; url: string }[];
-  }[];
+  vehicle?: IVehicle[];
 }
 
 type vehicleContextType = {
@@ -65,13 +52,14 @@ type vehicleContextType = {
   setLogged: React.Dispatch<React.SetStateAction<boolean>>;
   user: IUser | undefined;
   setUser: React.Dispatch<React.SetStateAction<IUser | undefined>>;
+  getAllVehicle: () => Promise<void>;
 };
 
-const VehicleContext = createContext<vehicleContextType>(
+export const VehicleContext = createContext<vehicleContextType>(
   {} as vehicleContextType
 );
 
-export function VehicleProvider({ children }: ProviderProps) {
+export const VehicleProvider = ({ children }: ProviderProps) => {
   const [allVehicles, setAllVehicles] = useState<IVehicle[]>([]);
   const [logged, setLogged] = useState<boolean>(false);
   const [user, setUser] = useState<IUser>();
@@ -90,6 +78,17 @@ export function VehicleProvider({ children }: ProviderProps) {
     }
   }, []);
 
+  const getAllVehicle = async () => {
+    await api
+      .get("/vehicles")
+      .then((response) => {
+        setAllVehicles(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
     <VehicleContext.Provider
       value={{
@@ -99,13 +98,10 @@ export function VehicleProvider({ children }: ProviderProps) {
         setLogged,
         user,
         setUser,
+        getAllVehicle,
       }}
     >
       {children}
     </VehicleContext.Provider>
   );
-}
-
-export function useVehicleContext() {
-  return useContext(VehicleContext);
-}
+};

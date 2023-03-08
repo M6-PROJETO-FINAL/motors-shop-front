@@ -3,31 +3,31 @@ import { Form } from "./styles";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import api from "../../services/api";
 import { toast } from "react-toastify";
-import { UpdateApiContext } from "../../context/UpdateApi";
+import { IVehicleUpdate } from "../../interfaces/vehicle.interfaces";
+import { IModalEdit } from "../../interfaces/successModal.interfaces";
 
-function EditSaleForm({
+const EditSaleForm: React.FC<IModalEdit> = ({
   setShowEditProductModal,
-  productId,
+  product,
   setShowDeleteModal,
-}: any) {
-  const [vehicleType, setVehicleType] = useState("car");
-  const [vehicleInfo, setVehicleInfo] = useState<IVehicleRegister>();
-  const { setUpdateApi, updateApi } = useContext(UpdateApiContext);
-  useEffect(() => {
-    api
-      .get(`vehicles/${productId}`)
-      .then((res) => setVehicleInfo(res.data))
-      .catch((err) => console.log("Tente novamente mais tarde."));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+}) => {
+  const [vehicleType, setVehicleType] = useState(product?.type_veihcle);
+  // const { setUpdateApi, updateApi } = useContext(UpdateApiContext);
+  const [numFotos, setNumFotos] = useState(product?.vehicleImages?.length || 1);
+
+  function adicionarFoto() {
+    if (numFotos < 6) {
+      setNumFotos(numFotos + 1);
+    }
+  }
 
   const userToken = localStorage.getItem("@motorsShop:token");
 
   const formSchema = yup.object().shape({
-    name: yup.string(),
+    title: yup.string(),
     description: yup.string().required("Campo obrigatório"),
     km: yup
       .string()
@@ -40,7 +40,7 @@ function EditSaleForm({
       .string()
       .required("Campo obrigatório")
       .matches(/^(?=.*[0-9])(?=.{4,})/, "Insira apenas 4 números"),
-    coverImage: yup.string().required("Campo obrigatório"),
+    image_cover: yup.string().required("Campo obrigatório"),
     price: yup.string().required("Campo obrigatório"),
     photo1: yup.string().required("Campo obrigatório"),
     photo2: yup.string(),
@@ -50,39 +50,22 @@ function EditSaleForm({
     photo6: yup.string(),
   });
 
-  interface IVehicleRegister {
-    name: string;
-    description: string;
-    km: number;
-    year: number;
-    coverImage: string;
-    price: number;
-    type: string;
-    vehicleImages?: { id: string; url: string }[];
-    photo1: string;
-    photo2?: string;
-    photo3?: string;
-    photo4?: string;
-    photo5?: string;
-    photo6?: string;
-  }
-
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IVehicleRegister>({
+  } = useForm<IVehicleUpdate>({
     resolver: yupResolver(formSchema),
   });
 
-  const onSubmit = (data: IVehicleRegister) => {
+  const onSubmit = (data: IVehicleUpdate) => {
     const {
-      coverImage,
-      description,
-      km,
-      name,
-      price,
+      title,
       year,
+      km,
+      price,
+      description,
+      image_cover,
       photo1,
       photo2,
       photo3,
@@ -91,46 +74,52 @@ function EditSaleForm({
       photo6,
     } = data;
 
-    const vehiclePhotos = [photo1];
+    const vehicleImages = [photo1];
     if (photo2) {
-      vehiclePhotos.push(photo2);
+      vehicleImages.push(photo2);
     }
     if (photo3) {
-      vehiclePhotos.push(photo3);
+      vehicleImages.push(photo3);
     }
     if (photo4) {
-      vehiclePhotos.push(photo4);
+      vehicleImages.push(photo4);
     }
     if (photo5) {
-      vehiclePhotos.push(photo5);
+      vehicleImages.push(photo5);
     }
     if (photo6) {
-      vehiclePhotos.push(photo6);
+      vehicleImages.push(photo6);
     }
 
     const vehicleData = {
-      name,
-      description,
-      km,
-      year,
-      coverImage,
-      price,
       type: vehicleType,
-      vehiclePhotos,
+      title,
+      year,
+      km,
+      price,
+      description,
+      type_veihcle: vehicleType,
+      image_cover,
+      first_image: photo1,
+      vehicleImages,
     };
 
+    console.log(vehicleData);
+
     api
-      .patch(`vehicles/${productId}`, vehicleData, {
+      .patch(`vehicles/${product.id}`, vehicleData, {
         headers: { Authorization: `Bearer ${userToken}` },
       })
       .then((res) => {
         toast.success("Anúncio atualizado com sucesso!");
         setTimeout(() => {
-          setUpdateApi(!updateApi);
           setShowEditProductModal(false);
         }, 2000);
       })
-      .catch((err) => console.log("Tente novamente mais tarde."));
+      .catch((err) => {
+        console.log("Tente novamente mais tarde.");
+        console.error(err);
+      });
   };
 
   const handleDeleteButton = () => {
@@ -146,9 +135,9 @@ function EditSaleForm({
         label="Título"
         placeholder="Digitar título"
         register={register}
-        name="name"
-        error={errors?.name?.message}
-        defaultValue={vehicleInfo?.name}
+        name="title"
+        error={errors?.title?.message}
+        defaultValue={product?.title}
       />
       <div className="flex-row">
         <InputBase
@@ -159,7 +148,7 @@ function EditSaleForm({
           register={register}
           name="year"
           error={errors?.year?.message}
-          defaultValue={vehicleInfo?.year}
+          defaultValue={product?.year}
         />
         <InputBase
           width="100%"
@@ -169,7 +158,7 @@ function EditSaleForm({
           register={register}
           name="km"
           error={errors?.km?.message}
-          defaultValue={vehicleInfo?.km}
+          defaultValue={product?.km}
         />
       </div>
       <InputBase
@@ -180,14 +169,14 @@ function EditSaleForm({
         register={register}
         name="price"
         error={errors?.price?.message}
-        defaultValue={vehicleInfo?.price}
+        defaultValue={product?.price}
       />
 
       <div className="description">
         <label>Descrição</label>
         <textarea
           placeholder="Digitar descrição"
-          defaultValue={vehicleInfo?.description}
+          defaultValue={product?.description}
           {...register("description")}
         ></textarea>
         {errors?.description?.message && (
@@ -245,12 +234,12 @@ function EditSaleForm({
         label="Imagem da capa"
         placeholder="http://image.com"
         register={register}
-        name="coverImage"
+        name="image_cover"
         error={errors?.coverImage?.message}
-        defaultValue={vehicleInfo?.coverImage}
+        defaultValue={product?.image_cover}
       />
 
-      {vehicleInfo?.vehicleImages?.map((elem, index) => (
+      {product?.vehicleImages?.map((elem, index) => (
         <InputBase
           key={index}
           width="100%"
@@ -263,6 +252,29 @@ function EditSaleForm({
           defaultValue={elem.url}
         />
       ))}
+
+      {[...Array(numFotos - (product?.vehicleImages?.length || 0))].map(
+        (_, index) => (
+          <InputBase
+            key={(product?.vehicleImages?.length || 0) + index}
+            width="100%"
+            type="text"
+            label={
+              (product?.vehicleImages?.length || 0) +
+              index +
+              1 +
+              "ª Foto da galeria"
+            }
+            placeholder="http://image.com"
+            register={register}
+            name={`photo${(product?.vehicleImages?.length || 0) + index + 1}`}
+          />
+        )
+      )}
+
+      <button type="button" onClick={adicionarFoto} className="btn-add-photos">
+        Adicionar foto (máx: 6)
+      </button>
 
       <div className="final-buttons">
         <button
@@ -278,6 +290,6 @@ function EditSaleForm({
       </div>
     </Form>
   );
-}
+};
 
 export default EditSaleForm;

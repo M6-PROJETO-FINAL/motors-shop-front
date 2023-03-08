@@ -206,4 +206,12 @@ export const StyledForm = styled.form`
       font-style: italic;
     }
   }
+
+  .button--box > a {
+    width: 85%;
+
+    button {
+      width: 100%;
+    }
+  }
 `;

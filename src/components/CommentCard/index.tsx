@@ -30,7 +30,7 @@ function CommentCard({ userName, commentDate, text, commentId }: CommentProps) {
   useEffect(() => {
     if (userId !== null) {
       api
-        .get(`comments/${commentId}`)
+        .get(`/comments/`)
         .then((res) => {
           setComment(res.data);
         })
@@ -41,7 +41,7 @@ function CommentCard({ userName, commentDate, text, commentId }: CommentProps) {
 
   const deleteComment = (commentId: string) => {
     api
-      .delete(`comments/${commentId}`, {
+      .delete(`/comments/${commentId}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
