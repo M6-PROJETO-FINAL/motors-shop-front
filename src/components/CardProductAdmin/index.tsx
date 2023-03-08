@@ -22,7 +22,7 @@ function CardProductAdmin({ product, sellerName, sellerId }: any) {
   };
 
   const openProductPage = () => {
-    navigate(`/product/${product.id}`);
+    navigate(`/product`,{state:product});
   };
 
   const handleModal = () => {
@@ -45,10 +45,10 @@ function CardProductAdmin({ product, sellerName, sellerId }: any) {
         />
       )}
       <div className="product-image" onClick={() => openProduct(product.id)}>
-        <img src={product.coverImage} alt={product.name} width={310} />
+        <img src={product.image_cover} alt={product.title} width={310} />
       </div>
       <h2 className="product-title" onClick={() => openProduct(product.id)}>
-        {product.name}
+        {product.title}
       </h2>
       <p className="product-description">{product.description}</p>
       <div className="div-product-owner">
@@ -96,3 +96,4 @@ function CardProductAdmin({ product, sellerName, sellerId }: any) {
 }
 
 export default CardProductAdmin;
+

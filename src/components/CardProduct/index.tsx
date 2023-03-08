@@ -18,22 +18,23 @@ function CardProduct({ product }: any) {
     <CardProductContainer>
         <div className="product-image" onClick={() => openProduct(product.id)}>
           <img
-            src={product.coverImage}
-            alt={product.name}
+            src={product.image_cover}
+            alt={product.title}
             width={310}
             height={152}
           />
         </div>
         <h2 className="product-title" onClick={() => openProduct(product.id)}>
-          {product.name}
+          {product.title}
         </h2>
         <p className="product-description">{product.description}</p>
         <div className="div-product-owner">
           <div className="owner-initials" onClick={() => handleClickSeller()}>
-            <p>{userInitials(product.user.fullName)}</p>
+            {/* <p>{userInitials(product.user.fullName)}</p> */}
+            <p>{userInitials("Higor")}</p>
           </div>
           <p className="owner-name" onClick={() => handleClickSeller()}>
-            {product.user.fullName}
+            {/* {product.user.fullName} */ "Higor"} 
           </p>
         </div>
         <div className="product-details">
