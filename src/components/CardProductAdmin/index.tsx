@@ -34,13 +34,13 @@ function CardProductAdmin({ product, sellerName, sellerId }: any) {
       {showDeleteModal && (
         <DeleteModal
           setShowDeleteModal={setShowDeleteModal}
-          productId={product.id}
+          product={product}
         />
       )}
       {showEditProductModal && (
         <EditProductModal
           setShowEditProductModal={setShowEditProductModal}
-          productId={product.id}
+          product={product}
           setShowDeleteModal={setShowDeleteModal}
         />
       )}

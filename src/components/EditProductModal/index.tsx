@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { MdClose } from "react-icons/md";
+import { IModalEdit } from "../../interfaces/successModal.interfaces";
 import EditSaleForm from "../EditSaleForm";
 import { Container } from "./styles";
 
-function EditProductModal({
+export const EditProductModal: React.FC<IModalEdit> = ({
   setShowEditProductModal,
-  productId,
+  product,
   setShowDeleteModal,
-}: any) {
-  const [saleType, setSaleType] = useState("sale");
+}) => {
+  const [saleType, setSaleType] = useState(product?.type);
 
   return (
     <Container>
@@ -38,13 +39,13 @@ function EditProductModal({
 
         <p className="vehicleInfo">Informações do veículo</p>
         <EditSaleForm
-          setShowEditProductModal={setShowEditProductModal}
-          productId={productId}
+          product={product}
           setShowDeleteModal={setShowDeleteModal}
+          setShowEditProductModal={setShowEditProductModal}
         />
       </div>
     </Container>
   );
-}
+};
 
 export default EditProductModal;

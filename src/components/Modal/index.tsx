@@ -47,15 +47,15 @@ export const SuccessModal: React.FC<IModalSuccess> = ({
 
 export const DeleteModal: React.FC<IModalDelete> = ({
   setShowDeleteModal,
-  productId,
+  product,
 }) => {
-  const { setUpdateApi, updateApi} = useContext(UpdateApiContext);
+  // const { setUpdateApi, updateApi } = useContext(UpdateApiContext);
   const userToken = localStorage.getItem("@motorsShop:token");
   const handleDelete = (data: any) => {
     if (data.status === 204) {
       toast.success("Veículo deletado!");
       setShowDeleteModal(false);
-      setUpdateApi(!updateApi)
+      // setUpdateApi(!updateApi);
     } else {
       toast.error("Não foi possível deletar!");
     }
@@ -88,7 +88,7 @@ export const DeleteModal: React.FC<IModalDelete> = ({
               colorbutton="Alert"
               onClick={() => {
                 api
-                  .delete(`vehicles/${productId}`, {
+                  .delete(`vehicles/${product.id}`, {
                     headers: { Authorization: `Bearer ${userToken}` },
                   })
                   .then((res) => handleDelete(res))

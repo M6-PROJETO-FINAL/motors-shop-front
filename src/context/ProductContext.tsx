@@ -1,10 +1,6 @@
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { IVehicleUpdate } from "../interfaces/vehicle.interfaces";
 
 import api from "../services/api";
 
@@ -12,20 +8,19 @@ interface ProviderProps {
   children: ReactNode;
 }
 
-interface IVehicle {
+export interface IVehicle {
   id: string;
   type: "sale" | "auction";
   title: string;
-  year: number;
-  km: number;
-  price: number;
+  year: string;
+  km: string;
+  price: string;
   description: string;
-  coverImage: string;
-  type_veihcle: "sale" | "motor";
+  type_veihcle: "car" | "motorcycle";
   image_cover: string;
   first_image: string;
-  createdAt: string;
-  updatedAt: string;
+  created_at: string;
+  update_at: string;
   vehicleImages?: { id: string; url: string }[];
 }
 
@@ -57,14 +52,14 @@ type vehicleContextType = {
   setLogged: React.Dispatch<React.SetStateAction<boolean>>;
   user: IUser | undefined;
   setUser: React.Dispatch<React.SetStateAction<IUser | undefined>>;
-  getAllProducts: () => Promise<void>;
+  getAllVehicle: () => Promise<void>;
 };
 
-const VehicleContext = createContext<vehicleContextType>(
+export const VehicleContext = createContext<vehicleContextType>(
   {} as vehicleContextType
 );
 
-export function VehicleProvider({ children }: ProviderProps) {
+export const VehicleProvider = ({ children }: ProviderProps) => {
   const [allVehicles, setAllVehicles] = useState<IVehicle[]>([]);
   const [logged, setLogged] = useState<boolean>(false);
   const [user, setUser] = useState<IUser>();
@@ -83,11 +78,10 @@ export function VehicleProvider({ children }: ProviderProps) {
     }
   }, []);
 
-  const getAllProducts = async () => {
+  const getAllVehicle = async () => {
     await api
       .get("/vehicles")
       .then((response) => {
-        console.log(response.data);
         setAllVehicles(response.data);
       })
       .catch((error) => {
@@ -104,14 +98,10 @@ export function VehicleProvider({ children }: ProviderProps) {
         setLogged,
         user,
         setUser,
-        getAllProducts,
+        getAllVehicle,
       }}
     >
       {children}
     </VehicleContext.Provider>
   );
-}
-
-export function useVehicleContext() {
-  return useContext(VehicleContext);
-}
+};
