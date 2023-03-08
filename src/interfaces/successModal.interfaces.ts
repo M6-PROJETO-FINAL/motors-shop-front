@@ -1,3 +1,5 @@
+import { IVehicle } from "../context/ProductContext";
+
 export interface IModalSuccess {
   header: string;
   title?: string;
@@ -12,5 +14,11 @@ export interface IFormSignIn {
 
 export interface IModalDelete {
   setShowDeleteModal: React.Dispatch<React.SetStateAction<boolean>>;
-  productId: string;
+  product: IVehicle;
+}
+
+export interface IModalEdit {
+  product: IVehicle;
+  setShowEditProductModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowDeleteModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
