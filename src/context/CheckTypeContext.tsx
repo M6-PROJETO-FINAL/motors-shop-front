@@ -9,9 +9,8 @@ export const CheckTypeProvider = ({ children }: Ichildren) => {
   const [isBikes, setIsBikes] = useState(false);
 
   const isCarOrBikesExists = (arr: any): { car: boolean; bike: boolean } => {
-
     const car = arr.filter((elem: any) => elem.type === "car");
-    const bike = arr.filter((elem: any) => elem.type === "motorcycle");
+    const bike = arr.filter((elem: any) => elem.type === "motorhicle");
 
     let object = { car: false, bike: false };
 

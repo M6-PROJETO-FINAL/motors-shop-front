@@ -191,7 +191,7 @@ function CreateSaleForm({ setShowCreateProductModal, saleType }: any) {
           <button
             className={vehicleType === "car" ? "notSelected" : "selected"}
             type="button"
-            onClick={() => setVehicleType("motorcycle")}
+            onClick={() => setVehicleType("motorhicle")}
           >
             Moto
           </button>

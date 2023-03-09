@@ -16,11 +16,12 @@ export interface IVehicle {
   km: string;
   price: string;
   description: string;
-  type_veihcle: "car" | "motorcycle";
+  type_veihcle: "car" | "motorhicle";
   image_cover: string;
   first_image: string;
   created_at: string;
   update_at: string;
+  user: IUser;
   vehicleImages?: { id: string; url: string }[];
 }
 
@@ -59,6 +60,16 @@ export const VehicleContext = createContext<vehicleContextType>(
   {} as vehicleContextType
 );
 
+export const getAllVehicle = async () => {
+  return api
+    .get("/vehicles")
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error(error);
+      return [];
+    });
+};
+
 export const VehicleProvider = ({ children }: ProviderProps) => {
   const [allVehicles, setAllVehicles] = useState<IVehicle[]>([]);
   const [logged, setLogged] = useState<boolean>(false);
@@ -78,16 +89,14 @@ export const VehicleProvider = ({ children }: ProviderProps) => {
     }
   }, []);
 
-  const getAllVehicle = async () => {
-    await api
-      .get("/vehicles")
-      .then((response) => {
-        setAllVehicles(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+  useEffect(() => {
+    const fetchVehicles = async () => {
+      const data = await getAllVehicle();
+      setAllVehicles(data);
+    };
+
+    fetchVehicles();
+  }, []);
 
   return (
     <VehicleContext.Provider

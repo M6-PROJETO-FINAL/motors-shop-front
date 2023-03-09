@@ -101,10 +101,8 @@ const EditSaleForm: React.FC<IModalEdit> = ({
       type_veihcle: vehicleType,
       image_cover,
       first_image: photo1,
-      vehicleImages,
+      // vehicleImages,
     };
-
-    console.log(vehicleData);
 
     api
       .patch(`vehicles/${product.id}`, vehicleData, {
@@ -112,6 +110,7 @@ const EditSaleForm: React.FC<IModalEdit> = ({
       })
       .then((res) => {
         toast.success("Anúncio atualizado com sucesso!");
+        console.log(res.data);
         setTimeout(() => {
           setShowEditProductModal(false);
         }, 2000);
@@ -201,7 +200,7 @@ const EditSaleForm: React.FC<IModalEdit> = ({
           <button
             className={vehicleType === "car" ? "notSelected" : "selected"}
             type="button"
-            onClick={() => setVehicleType("motorcycle")}
+            onClick={() => setVehicleType("motorhicle")}
           >
             Moto
           </button>
@@ -221,7 +220,7 @@ const EditSaleForm: React.FC<IModalEdit> = ({
           <button
             className={vehicleType === "car" ? "notSelected" : "selected"}
             type="button"
-            onClick={() => setVehicleType("motorcycle")}
+            onClick={() => setVehicleType("motorhicle")}
           >
             Não
           </button>
