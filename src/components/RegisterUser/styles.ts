@@ -1,3 +1,4 @@
+import { device } from './../../Global/media';
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -14,6 +15,12 @@ export const Container = styled.div`
     gap: 30px;
     margin: 1rem auto;
     background-color: var(--whiteFixed);
+
+    @media ${device.mobile} {
+      width: 70%;
+      flex-direction: column;
+      gap: 1rem;
+    }
   }
 
   h1 {

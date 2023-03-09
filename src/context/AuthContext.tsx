@@ -50,11 +50,11 @@ const AuthProvider = ({ children }: ILoginProviderProps) => {
         localStorage.setItem("@motorsShop:token", token);
         toast.success("Login efetuado com sucesso!");
         navigate("/profile", { replace: true });
-      })
-      .catch((error) => {
-        toast.error("Ocorreu algum problema");
-        console.error(error);
       });
+    } catch (error) {
+      toast.error("Ocorreu algum problema");
+      console.error(error);
+    }
   };
 
   const logoutUser = async () => {
@@ -64,6 +64,7 @@ const AuthProvider = ({ children }: ILoginProviderProps) => {
 
   const getProfile = async () => {
     const { data } = await api.get<IUserRequest>("/user/profile");
+    console.log(data);
     setUser(data);
 
     localStorage.setItem("@motorsShop:id", data.id);
