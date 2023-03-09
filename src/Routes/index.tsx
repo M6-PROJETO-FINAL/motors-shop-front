@@ -18,8 +18,8 @@ export const RoutesMain = () => {
       {/* <Route path="/recoveraccount" element={<RecoverAccount />} /> */}
       <Route element={<ProtectedRoutes />}>
         <Route path="/profile" element={<ProfileViewAdmin />} />
+        <Route path="/product/:uuid" element={<ProductPage />} />
       </Route>
-      <Route path="/product" element={<ProductPage />} />
     </Routes>
   );
 };

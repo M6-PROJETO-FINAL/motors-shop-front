@@ -19,9 +19,14 @@ function CarouselProductsOwner({ props, id }: any) {
         setUserInfo(res.data);
         setState(isCarOrBikesExists(res.data.vehicle));
       })
-      .catch((err) => console.log("Tente novamente mais tarde."));
+      .catch((err) => {
+        console.error(err);
+        console.log("Tente novamente mais tarde.");
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  console.log(userInfo);
 
   return (
     <CarouselProductsContainer>

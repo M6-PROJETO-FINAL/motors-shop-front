@@ -22,7 +22,7 @@ function CardProductAdmin({ product, sellerName, sellerId }: any) {
   };
 
   const openProductPage = () => {
-    navigate(`/product`,{state:product});
+    navigate(`/product`, { state: product });
   };
 
   const handleModal = () => {
@@ -96,4 +96,3 @@ function CardProductAdmin({ product, sellerName, sellerId }: any) {
 }
 
 export default CardProductAdmin;
-

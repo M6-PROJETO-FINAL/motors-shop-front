@@ -16,34 +16,43 @@ import PostCommentCard from "../PostCommentCard";
 import { useEffect, useState } from "react";
 import CreatePhotoModal from "../CreatePhotoModal";
 import api from "../../services/api";
-import jwt_decode from "jwt-decode"
+import jwt_decode from "jwt-decode";
+import { IUser, IVehicle } from "../../context/ProductContext";
 
-function ProductDetails({ product, sellerId }: any) {
+function ProductDetails({ productId }: any) {
   const navigate = useNavigate();
-  const [advs,setAdvs] = useState([])
-  const [payloadJwt,setPayloadJwt] = useState({} as any) 
-  const [isPost,setIsPost] = useState(false)
+  const [advs, setAdvs] = useState([]);
+  const [payloadJwt, setPayloadJwt] = useState({} as any);
+  const [isPost, setIsPost] = useState(false);
+  const [product, setProduct] = useState<IVehicle>();
+  const [owner, setOwner] = useState<IUser>();
 
-  const [showPhotoProductModal, setShowPhotoProductModal] = useState(true);
-  const handleClickSeller = () => {
-    navigate(`/profile/${sellerId}`);
-  };
+  const [showPhotoProductModal, setShowPhotoProductModal] = useState(false);
+  // const handleClickSeller = () => {
+  //   navigate(`/profile/${sellerId}`);
+  // };
 
   useEffect(() => {
     api
-      .get(`comments/${product.id}`)
+      .get(`comments/${productId}`)
       .then((res) => {
-        setAdvs(res.data)
-        setIsPost(false)
+        setAdvs(res.data);
+        setIsPost(false);
+        setProduct(res.data[0].vehicle);
+        setOwner(res.data[0].user);
         const token = localStorage.getItem("@motorsShop:token");
-        if(token){
-          const data = jwt_decode(token)
-          setPayloadJwt(data)
+        if (token) {
+          const data = jwt_decode(token);
+          setPayloadJwt(data);
         }
       })
-      .catch((err) => console.log("Tente novamente mais tarde."));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+      .catch((err) => {
+        navigate(`/home`);
+        console.log("Tente novamente mais tarde.");
+      });
   }, [isPost]);
+
+  console.log(product);
 
   return (
     <ProfileHeader>
@@ -54,19 +63,19 @@ function ProductDetails({ product, sellerId }: any) {
       <div className="profile-context">
         <div className="profile-content">
           <ImageContent>
-            <img src={product.image_cover} alt={product.title} />
+            <img src={product?.image_cover} alt={product?.title} />
           </ImageContent>
 
           <ProductContent>
-            <h2>{product.title}</h2>
+            <h2>{product?.title}</h2>
 
             <div className="product-details">
               <div className="span-btns">
-                <span>{product.km}</span>
-                <span>{product.year}</span>
+                <span>{product?.km}</span>
+                <span>{product?.year}</span>
               </div>
               <p>
-                {Number(product.price).toLocaleString("pt-BR", {
+                {Number(product?.price).toLocaleString("pt-BR", {
                   style: "currency",
                   currency: "BRL",
                 })}
@@ -88,20 +97,19 @@ function ProductDetails({ product, sellerId }: any) {
 
           <DescriptionContent>
             <h2>Descrição</h2>
-            <p>{product.description}</p>
+            <p>{product?.description}</p>
           </DescriptionContent>
-          {advs.length > 0 && 
-              <CommentCard
-                  comments={advs}
-                  setIsPost={setIsPost}
-              />
-          }
-     
-         <PostCommentCard
-            userName={payloadJwt?.name || ""}
-            advertisementId={product.id}
-            setIsPost={setIsPost}
-          />
+          {advs.length > 0 && (
+            <CommentCard comments={advs} setIsPost={setIsPost} />
+          )}
+
+          {product && (
+            <PostCommentCard
+              userName={payloadJwt?.name || ""}
+              advertisementId={product?.id}
+              setIsPost={setIsPost}
+            />
+          )}
         </div>
 
         <div className="profile-content">
@@ -111,40 +119,41 @@ function ProductDetails({ product, sellerId }: any) {
             <div className="images">
               <div className="image-book">
                 <img
-                  src={product.coverImage}
+                  src={product?.image_cover}
                   alt=""
                   onClick={() => setShowPhotoProductModal(true)}
                 />
               </div>
               <div className="image-book">
-                <img src={product.coverImage} alt="" />
+                <img src={product?.image_cover} alt="" />
               </div>
               <div className="image-book">
-                <img src={product.coverImage} alt="" />
+                <img src={product?.image_cover} alt="" />
               </div>
               <div className="image-book">
-                <img src={product.coverImage} alt="" />
+                <img src={product?.image_cover} alt="" />
               </div>
               <div className="image-book">
-                <img src={product.coverImage} alt="" />
+                <img src={product?.image_cover} alt="" />
               </div>
               <div className="image-book">
-                <img src={product.coverImage} alt="" />
+                <img src={product?.image_cover} alt="" />
               </div>
             </div>
           </BoxImages>
 
           <PerfilContent>
-            {/* <IconStyled>{userInitials(product.user.fullName)}</IconStyled> */}
-            <IconStyled>{userInitials("Higor")}</IconStyled>
-            <h2>{"Higor"}</h2>
+            {owner?.fullName && (
+              <IconStyled>{userInitials(owner?.fullName)}</IconStyled>
+            )}
+            <h2>{owner?.fullName}</h2>
             <p>{"Show"}</p>
 
             <Button
               type="button"
               colorbutton="Grey"
               width="70%"
-              onClick={() => handleClickSeller()}
+              // onClick={() => handleClickSeller()}
             >
               Ver todos os anuncios
             </Button>
@@ -156,4 +165,3 @@ function ProductDetails({ product, sellerId }: any) {
 }
 
 export default ProductDetails;
-

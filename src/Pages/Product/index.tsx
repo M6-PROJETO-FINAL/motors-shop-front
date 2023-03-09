@@ -4,28 +4,24 @@ import ProductDetails from "../../components/ProductDetails";
 import { BackgroundHeaderStyled, BackPageStyled } from "./style";
 import { useState, useEffect } from "react";
 import api from "../../services/api";
-import { useLocation } from "react-router";
+import { useLocation, useParams } from "react-router";
 
 const ProductPage = () => {
-  const userId = localStorage.getItem("@motorsShop:userId");
   const token = localStorage.getItem("@motorsShop:token");
-  const location = useLocation();
-  const product = location.state
+  // const location = useLocation();
+  // const productID = location.state;
+  const { uuid } = useParams<{ uuid: string }>();
 
+  console.log(uuid);
 
   return (
     <BackPageStyled>
       <NavbarLogged />
       <BackgroundHeaderStyled className="background"></BackgroundHeaderStyled>
-      <ProductDetails
-        product={product}
-        productId={product.id}
-        sellerId={"Higor"} // Não está vindo no backend
-      />
+      <ProductDetails productId={uuid} />
       <Footer />
     </BackPageStyled>
   );
 };
 
 export default ProductPage;
-

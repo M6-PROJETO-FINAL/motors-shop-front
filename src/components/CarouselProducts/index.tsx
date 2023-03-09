@@ -1,37 +1,38 @@
-import CardProdut from "../CardProduct";
+import CardProduct from "../CardProduct";
 import { CarouselProductsContainer } from "./styles";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CheckTypeContext } from "../../context/CheckTypeContext";
-// import { useVehicleContext } from "../../context/ProductContext";
-// import api from "../../services/api";
+import { IVehicle } from "../../context/ProductContext";
+import api from "../../services/api";
+import { UpdateApiContext } from "../../context/UpdateApi";
 
-function CarouselProducts({ props, arr }: any) {
+function CarouselProducts({ props, products }: any) {
   const { isBikes, isCar, isCarOrBikesExists } = useContext(CheckTypeContext);
+  const { updateApi } = useContext(UpdateApiContext);
   useEffect(() => {
-    isCarOrBikesExists(arr);
-  }, [arr, isCarOrBikesExists]);
+    isCarOrBikesExists(products);
+  }, [products, isCarOrBikesExists]);
 
   return (
     <CarouselProductsContainer>
-
       {props === "car" ? (
-        !isCar ? (
+        products.length === 0 ? (
           <p>Nenhum Carro Cadastrado</p>
         ) : (
-          arr?.map(
+          products?.map(
             (product: any) =>
-              product.type === props && (
-                <CardProdut key={product.id} product={product}  />
+              product.type_veihcle === props && (
+                <CardProduct key={product.id} product={product} />
               )
           )
         )
-      ) : !isBikes ? (
+      ) : products.length === 0 ? (
         <p>Nenhuma Moto Cadastrada</p>
       ) : (
-        arr?.map(
+        products?.map(
           (product: any) =>
-            product.type === props && (
-              <CardProdut key={product.id} product={product} />
+            product.type_veihcle === props && (
+              <CardProduct key={product.id} product={product} />
             )
         )
       )}
