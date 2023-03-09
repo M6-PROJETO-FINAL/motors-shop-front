@@ -64,7 +64,6 @@ const AuthProvider = ({ children }: ILoginProviderProps) => {
 
   const getProfile = async () => {
     const { data } = await api.get<IUserRequest>("/user/profile");
-    console.log(data);
     setUser(data);
 
     localStorage.setItem("@motorsShop:id", data.id);

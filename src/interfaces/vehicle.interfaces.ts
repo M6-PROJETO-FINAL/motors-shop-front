@@ -7,7 +7,7 @@ export interface IVehicleComment {
   price: number | string;
   description: string;
   coverImage: string;
-  type_veihcle: "car" | "motorcycle";
+  type_veihcle: "car" | "motorhicle";
   image_cover: string;
   first_image: string;
   createdAt: string;
@@ -30,7 +30,7 @@ export interface IVehicleRegister {
   price: number | string;
   description: string;
   coverImage: string;
-  type_veihcle: "car" | "motorcycle";
+  type_veihcle: "car" | "motorhicle";
   image_cover: string;
   first_image: string;
   vehicleImages?: { id: string; url: string }[];
@@ -50,7 +50,7 @@ export interface IVehicleUpdate {
   price: number | string;
   description?: string;
   coverImage?: string;
-  type_veihcle: "car" | "motorcycle";
+  type_veihcle: "car" | "motorhicle";
   image_cover?: string;
   first_image?: string;
   vehicleImages?: { id: string; url: string }[];

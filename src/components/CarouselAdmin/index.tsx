@@ -12,37 +12,35 @@ function CarouselAdmin({ props, products }: any) {
 
   const { isBikes, isCar, isCarOrBikesExists } = useContext(CheckTypeContext);
   const { updateApi } = useContext(UpdateApiContext);
-  // useEffect(() => {
-  //   isCarOrBikesExists(products);
-  // }, [products, isCarOrBikesExists]);
+  useEffect(() => {
+    isCarOrBikesExists(products);
+  }, [products, isCarOrBikesExists]);
 
-  // useEffect(() => {
-  //   api
-  //     .get(`users/${id}`)
-  //     .then((res) => {
-  //       setUserInfo(res.data);
-  //       setState(isCarOrBikesExists(res.data.vehicle));
-  //     })
-  //     .catch((err) => console.log("Tente novamente mais tarde."));
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [updateApi]);
+  useEffect(() => {
+    api
+      .get(`user/profile`)
+      .then((res) => {
+        setUserInfo(res.data);
+        setState(isCarOrBikesExists(res.data.vehicle));
+      })
+      .catch((err) => console.log("Tente novamente mais tarde."));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [updateApi]);
 
   return (
     <CarouselProductsContainer>
       {props === "car" ? (
-        products.length === 0? (
+        products.length === 0 ? (
           <p>Nenhum Carro Cadastrado</p>
         ) : (
           products?.map(
-            (elem:any) =>
+            (elem: any) =>
               elem.type_veihcle === props && (
                 <CardProductAdmin
                   key={elem.id}
                   product={elem}
-                  // sellerName={elem.user.fullName} //Não existe vendedor vinculado ao vehicle
-                  // sellerId={elem.user.id}  //Não existe vendedor vinculado ao vehicle
-                  sellerName={"Higor"} //Não existe vendedor vinculado ao vehicle
-                  sellerId={"970a2828-a74f-405d-a342-bfb0daddb74e"}  //Não existe vendedor vinculado ao vehicle
+                  sellerName={elem.user.fullName}
+                  sellerId={elem.user.id}
                 />
               )
           )
@@ -51,13 +49,13 @@ function CarouselAdmin({ props, products }: any) {
         <p>Nenhuma Moto Cadastrada</p>
       ) : (
         products?.map(
-          (elem:any) =>
+          (elem: any) =>
             elem.type_veihcle === props && (
               <CardProductAdmin
                 key={elem.id}
                 product={elem}
-                sellerName={"Higor"} //Não existe vendedor vinculado ao vehicle
-                sellerId={"970a2828-a74f-405d-a342-bfb0daddb74e"}  //Não existe vendedor vinculado ao vehicle
+                sellerName={elem.user.fullName}
+                sellerId={elem.user.id}
               />
             )
         )

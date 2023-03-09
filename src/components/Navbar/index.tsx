@@ -24,7 +24,7 @@ const Navbar = () => {
       <NavContent>
         <Logotipo className="logo">
           <Link to="/home">
-              <img src={logo} alt="" />
+            <img src={logo} alt="" />
           </Link>
         </Logotipo>
 
@@ -38,7 +38,7 @@ const Navbar = () => {
             <a href={"#cars"}>Carros</a>
           </li>
           <li>
-            <a href={"#motorcycle"}>Motos</a>
+            <a href={"#motorhicle"}>Motos</a>
           </li>
           <li>
             <a href={"auction"}>Leilão</a>
