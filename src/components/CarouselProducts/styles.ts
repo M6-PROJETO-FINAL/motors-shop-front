@@ -1,11 +1,13 @@
 import styled from "styled-components";
 
 export const CarouselProductsContainer = styled.ul`
+  width: 95%;
   display: flex;
   overflow-x: scroll;
   padding-bottom: 120px;
   margin: 40px 60px;
   gap: 48px;
+
 
   &::-webkit-scrollbar {
     width: 10px;

@@ -3,7 +3,7 @@ import { Footer } from "../../components/Footer";
 import Header from "../../components/Header";
 import CarouselProducts from "../../components/CarouselProducts";
 import CardAuction from "../../components/CardAuction";
-import { DivContainer } from "./style";
+import { DivContainer, Main } from "./style";
 import { CaroselTitle } from "./style";
 import { productAuction } from "../../utils/auctionProducts";
 
@@ -181,7 +181,7 @@ const products = [
 
 const HomePage = () => {
   return (
-    <main>
+    <Main>
       <Navbar />
       <Header />
       <CaroselTitle>Leilão</CaroselTitle>
@@ -195,7 +195,7 @@ const HomePage = () => {
       <CaroselTitle id="motorcycle">Motos</CaroselTitle>
       <CarouselProducts props={"motorcycle"} arr={products} />
       <Footer />
-    </main>
+    </Main>
   );
 };
 

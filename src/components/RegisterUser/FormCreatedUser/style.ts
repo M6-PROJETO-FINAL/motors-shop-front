@@ -1,3 +1,4 @@
+import { device } from './../../../Global/media';
 import styled from "styled-components";
 
 export const StyledForm = styled.form`
@@ -25,10 +26,18 @@ export const StyledForm = styled.form`
     margin-top: 1rem;
     cursor: pointer;
 
+
+
     .buttons {
       display: flex;
       gap: 1rem;
       height: 48px;
+
+      @media ${device.mobile} {
+      flex-direction: column;
+      height: 98px;
+      gap: 1rem;
+    }
 
       .notSelected {
         background-color: var(--whiteFixed);

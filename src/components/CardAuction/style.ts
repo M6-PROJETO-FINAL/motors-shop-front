@@ -1,18 +1,19 @@
 import styled from "styled-components";
 import img from "../../assets/img/auction.jpg";
-import { device } from "../../Global/media";
 
 export const AuctionContainer = styled.div`
   display: flex;
   gap: 40px;
 `;
 
-export const AuctionContext = styled.div`
+export const AuctionContext = styled.li`
   width: 100%;
   height: 388px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-left: 10px;
+  position: static;
 `;
 
 export const CardAuctionContainer = styled.div`
