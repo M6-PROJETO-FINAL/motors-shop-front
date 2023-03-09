@@ -11,11 +11,11 @@ import { CommentDiv } from "./styles";
 import { BsFillCircleFill } from "react-icons/bs";
 
 interface CommentProps {
-  comments:any[]
-  setIsPost:React.Dispatch<React.SetStateAction<boolean>> 
+  comments: any[];
+  setIsPost: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function CommentCard({ comments,setIsPost }: CommentProps) {
+function CommentCard({ comments, setIsPost }: CommentProps) {
   const [showModal, setShowModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [comment, setComment] = useState({} as any);
@@ -25,10 +25,10 @@ function CommentCard({ comments,setIsPost }: CommentProps) {
   const userId = localStorage.getItem("@motorsShop:userId");
   const token = localStorage.getItem("@motorsShop:token");
 
-  const handleSubmit = (comment:any) => {
-    setComment(comment)
-    setShowModal(true)
-  }
+  const handleSubmit = (comment: any) => {
+    setComment(comment);
+    setShowModal(true);
+  };
 
   useEffect(() => {
     if (userId !== null) {
@@ -49,10 +49,10 @@ function CommentCard({ comments,setIsPost }: CommentProps) {
       })
       .then((res) => {
         toast.success("Comentario deletado com Sucesso");
-        setIsPost(true)
+        setIsPost(true);
         setIsComment(!isComment);
       })
-      .catch((err) => toast.error("Comentario não foi deletado"));
+      .catch((err) => console.error(err));
   };
 
   return (
@@ -74,40 +74,39 @@ function CommentCard({ comments,setIsPost }: CommentProps) {
         />
       )}
       <h2>Comentários</h2>
-      { comments.map((comment,index) => (
+      {comments.map((comment, index) => (
         <div key={index}>
-            <div  key={index} className="userInfo">
-              <div className="sellerPhoto">
-                <p>{userInitials(comment.user.fullName)}</p>
-              </div>
-              <p className="userName">{comment.user.fullName}</p>
-              <div className="time">
-                <BsFillCircleFill size={5} />
-                <span key={index} className="date">{calculateTimePassed(comment.user.created_at)}</span>
-              </div>
+          <div key={index} className="userInfo">
+            <div className="sellerPhoto">
+              <p>{userInitials(comment.user.fullName)}</p>
             </div>
-            <div className="text">{comment.text}</div>
-            <div className="buttons">
-              <button className="editButton" onClick={() => handleSubmit(comment)}>
-                <AiFillEdit size={20} />
-              </button>
-              <button
-                className="deleteButton"
-                onClick={() => deleteComment(comment.id)}
-              >
-                <AiFillDelete color="#4529E6" size={20} />
-              </button>
+            <p className="userName">{comment.user.fullName}</p>
+            <div className="time">
+              <BsFillCircleFill size={5} />
+              <span key={index} className="date">
+                {calculateTimePassed(comment.user.created_at)}
+              </span>
             </div>
+          </div>
+          <div className="text">{comment.text}</div>
+          <div className="buttons">
+            <button
+              className="editButton"
+              onClick={() => handleSubmit(comment)}
+            >
+              <AiFillEdit size={20} />
+            </button>
+            <button
+              className="deleteButton"
+              onClick={() => deleteComment(comment.id)}
+            >
+              <AiFillDelete color="#4529E6" size={20} />
+            </button>
+          </div>
         </div>
-      )
-      
-      
-      )
-      }
-
+      ))}
     </CommentDiv>
   );
 }
 
 export default CommentCard;
-

@@ -32,24 +32,38 @@ function ProductDetails({ productId }: any) {
   //   navigate(`/profile/${sellerId}`);
   // };
 
-  useEffect(() => {
+  const functionCatchAdv = (id: string) => {
     api
-      .get(`comments/${productId}`)
+      .get(`vehicles/`)
       .then((res) => {
-        setAdvs(res.data);
-        setIsPost(false);
+        const data = res.data;
+        const advSelect = data.filter((element: any) => element?.id === id);
+        setProduct(advSelect[0]);
+        setOwner(advSelect[0].user);
+      })
+      .catch((err) => console.log("Tente novamente mais tarde."));
+  };
+
+  useEffect(() => {
+    api.get(`comments/${productId}`).then((res) => {
+      setAdvs(res.data);
+      setIsPost(false);
+      if (res.data.length > 0) {
         setProduct(res.data[0].vehicle);
         setOwner(res.data[0].user);
-        const token = localStorage.getItem("@motorsShop:token");
-        if (token) {
-          const data = jwt_decode(token);
-          setPayloadJwt(data);
-        }
-      })
-      .catch((err) => {
-        navigate(`/home`);
-        console.log("Tente novamente mais tarde.");
-      });
+      } else {
+        functionCatchAdv(productId);
+      }
+      const token = localStorage.getItem("@motorsShop:token");
+      if (token) {
+        const data = jwt_decode(token);
+        setPayloadJwt(data);
+      }
+    });
+    // .catch((err) => {
+    //   navigate(`/home`);
+    //   console.log("Tente novamente mais tarde.");
+    // });
   }, [isPost]);
 
   console.log(product);

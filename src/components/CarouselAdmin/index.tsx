@@ -10,8 +10,8 @@ function CarouselAdmin({ props, products }: any) {
   const [userInfo, setUserInfo] = useState<IUser | undefined>();
   const [state, setState] = useState({} as any);
 
-  const { isBikes, isCar, isCarOrBikesExists } = useContext(CheckTypeContext);
   const { updateApi } = useContext(UpdateApiContext);
+  const { isBikes, isCar, isCarOrBikesExists } = useContext(CheckTypeContext);
   useEffect(() => {
     isCarOrBikesExists(products);
   }, [products, isCarOrBikesExists]);
@@ -24,8 +24,9 @@ function CarouselAdmin({ props, products }: any) {
         setState(isCarOrBikesExists(res.data.vehicle));
       })
       .catch((err) => console.log("Tente novamente mais tarde."));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [updateApi]);
+
+  console.log(updateApi);
 
   return (
     <CarouselProductsContainer>

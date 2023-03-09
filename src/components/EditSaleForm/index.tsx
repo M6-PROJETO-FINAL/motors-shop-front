@@ -3,11 +3,12 @@ import { Form } from "./styles";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import api from "../../services/api";
 import { toast } from "react-toastify";
 import { IVehicleUpdate } from "../../interfaces/vehicle.interfaces";
 import { IModalEdit } from "../../interfaces/successModal.interfaces";
+import { UpdateApiContext } from "../../context/UpdateApi";
 
 const EditSaleForm: React.FC<IModalEdit> = ({
   setShowEditProductModal,
@@ -15,7 +16,6 @@ const EditSaleForm: React.FC<IModalEdit> = ({
   setShowDeleteModal,
 }) => {
   const [vehicleType, setVehicleType] = useState(product?.type_veihcle);
-  // const { setUpdateApi, updateApi } = useContext(UpdateApiContext);
   const [numFotos, setNumFotos] = useState(product?.vehicleImages?.length || 1);
 
   function adicionarFoto() {
@@ -57,6 +57,8 @@ const EditSaleForm: React.FC<IModalEdit> = ({
   } = useForm<IVehicleUpdate>({
     resolver: yupResolver(formSchema),
   });
+
+  const { updateApi, setUpdateApi } = useContext(UpdateApiContext);
 
   const onSubmit = (data: IVehicleUpdate) => {
     const {
@@ -112,6 +114,7 @@ const EditSaleForm: React.FC<IModalEdit> = ({
         toast.success("Anúncio atualizado com sucesso!");
         console.log(res.data);
         setTimeout(() => {
+          setUpdateApi(!updateApi);
           setShowEditProductModal(false);
         }, 2000);
       })

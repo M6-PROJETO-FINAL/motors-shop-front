@@ -8,8 +8,6 @@ import { useLocation, useParams } from "react-router";
 
 const ProductPage = () => {
   const token = localStorage.getItem("@motorsShop:token");
-  // const location = useLocation();
-  // const productID = location.state;
   const { uuid } = useParams<{ uuid: string }>();
 
   console.log(uuid);
