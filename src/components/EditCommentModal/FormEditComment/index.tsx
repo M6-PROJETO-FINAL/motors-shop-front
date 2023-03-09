@@ -9,28 +9,23 @@ import api from "../../../services/api";
 import { IModalComment } from "../../../interfaces/comment.interfaces";
 import { CheckCommentContext } from "../../../context/CheckComment";
 
-export const FormEditComment: React.FC<IModalComment> = ({
+interface CommentProps {
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowSuccessModal: React.Dispatch<React.SetStateAction<boolean>>;
+  comment: any;
+  setIsPost?:React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const FormEditComment: React.FC<CommentProps> = ({
   setShowModal,
   setShowSuccessModal,
-  commentId,
+  comment,
+  setIsPost
 }) => {
   const { isComment, setIsComment } = useContext(CheckCommentContext);
 
   const userId = localStorage.getItem("@motorsShop:userId");
   const token = localStorage.getItem("@motorsShop:token");
-  const [comment, setComment] = useState({} as any);
-
-  useEffect(() => {
-    if (userId !== null) {
-      api
-        .get(`comments/${commentId}`)
-        .then((res) => {
-          setComment(res.data);
-        })
-        .catch((err) => console.log("Tente novamente mais tarde."));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const schema = yup.object().shape({
     text: yup.string().required("Required field"),
@@ -45,22 +40,27 @@ export const FormEditComment: React.FC<IModalComment> = ({
 
   const onSubmit = (data: object) => {
     api
-      .patch(`comments/${commentId}`, data, {
+      .patch(`comments/${comment.id}`, data, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
+        if(setIsPost)
+        setIsPost(true)
         setShowModal(false);
-        setShowSuccessModal(true);
         setIsComment(!isComment);
       })
       .catch((err) => console.log("Tente novamente mais tarde."));
   };
 
+  const handleClose = () => {
+    setShowModal(false)
+  }
+
+
   useEffect(() => {
     if (comment.text !== undefined) {
       let defaultValues = {} as any;
       defaultValues.text = comment.text;
-
       reset({ ...defaultValues });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -84,7 +84,7 @@ export const FormEditComment: React.FC<IModalComment> = ({
             type="button"
             colorbutton="Negative"
             width="40%"
-            onClick={() => setShowModal(false)}
+            onClick={() => handleClose()}
           >
             Cancelar
           </ButtonBase>

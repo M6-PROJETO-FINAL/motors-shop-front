@@ -7,7 +7,8 @@ import { Container } from "./styles";
 const EditCommentModal: React.FC<IModalComment> = ({
   setShowModal,
   setShowSuccessModal,
-  commentId,
+  comment,
+  setIsPost
 }) => {
   return (
     <Container>
@@ -19,7 +20,8 @@ const EditCommentModal: React.FC<IModalComment> = ({
         <FormEditComment
           setShowModal={setShowModal}
           setShowSuccessModal={setShowSuccessModal}
-          commentId={commentId}
+          comment={comment}
+          setIsPost={setIsPost}
         />
       </div>
     </Container>
@@ -27,3 +29,4 @@ const EditCommentModal: React.FC<IModalComment> = ({
 };
 
 export default EditCommentModal;
+
